@@ -13,11 +13,12 @@ const groupsRoutes = require("./routes/groupsRoutes");
 const questionRoutes = require("./routes/questionRoutes");
 const quizRoutes = require("./routes/quizRoutes");
 const resultRoutes = require("./routes/resultRoutes");
-
+let UserRoutes=require("./routerr");
 app.use("/api/v1/groups", groupsRoutes);
 app.use("/api/v1/questions", questionRoutes);
 app.use("/api/v1/quizzes", quizRoutes);
 app.use("/api/v1/results", resultRoutes);
+app.use("/api/v1/users", UserRoutes);
 
 app.listen(PORT, () => {
     console.log("server running on port " + PORT);
