@@ -10,8 +10,10 @@ app.use(cors());
 app.use(express.json());
 
 const groupsRoutes = require("./routes/groupsRoutes");
+const questionRoutes = require("./routes/questionRoutes");
 
 app.use("/api/v1/groups", groupsRoutes);
+app.use("/api/v1/questions", questionRoutes);
 
 app.listen(PORT, () => {
     console.log("server running on port " + PORT);
