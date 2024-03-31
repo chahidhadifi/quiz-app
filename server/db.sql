@@ -11,7 +11,9 @@ create table users (
     last_name text not null,
     email text not null unique,
     password text not null,
-    role text default 'member' -- three roles can be selected:: member, tutor and admin
+    role text default 'member', -- three roles can be selected:: member, tutor and admin
+    group_id int,
+    foreign key (group_id) references groups(id)
 );
 
 create table quiz (
