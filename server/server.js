@@ -11,9 +11,11 @@ app.use(express.json());
 
 const groupsRoutes = require("./routes/groupsRoutes");
 const questionRoutes = require("./routes/questionRoutes");
+const quizRoutes = require("./routes/quizRoutes");
 
 app.use("/api/v1/groups", groupsRoutes);
 app.use("/api/v1/questions", questionRoutes);
+app.use("/api/v1/quizzes", quizRoutes);
 
 app.listen(PORT, () => {
     console.log("server running on port " + PORT);
