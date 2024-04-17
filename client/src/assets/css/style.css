@@ -1,0 +1,320 @@
+tml {
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins";
+  font-size: 14px;
+  color: 900;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+.flex {
+  display: flex;
+}
+.flex-jc-sb {
+  justify-content: space-between;
+}
+.flex-ai-c {
+  align-items: center;
+}
+.flex-fd-c {
+  flex-direction: column;
+}
+.flex-fd-r {
+  flex-direction: row;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  cursor: default;
+}
+
+.login {
+  background-color: #0D1321;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+.login__container {
+  height: 100vh;
+}
+.login label {
+  font-weight: 500;
+}
+.login input[type=email], .login input[type=password] {
+  background-color: transparent;
+  border: 3px solid #FFFFFF;
+  border-radius: 7px;
+  padding: 10px 40px;
+  color: white;
+  font-family: "Poppins";
+  font-size: 12px;
+}
+.login input::placeholder {
+  color: #FFFFFF;
+  font-weight: 300;
+  font-size: 12px;
+}
+.login input[type=button] {
+  padding: 10px 0px;
+  padding-left: 40px;
+  padding-right: 25px;
+  font-family: "Poppins";
+  font-weight: 700;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+.login input[type=button] i {
+  color: #0D1321;
+}
+.login .icon {
+  padding: 12px;
+  min-width: 40px;
+}
+.login .login__writeup h2 {
+  color: #C5D86D;
+}
+.login .login__writeup__logo {
+  width: 170px;
+}
+.login .login__writeup__submit_button {
+  width: 100px;
+  color: #0D1321;
+}
+.login .login__writeup__submit_button:hover input[type=button] {
+  color: #0D1321;
+  background-color: #C5D86D;
+}
+.login .login__writeup__link {
+  font-size: 12px;
+  margin-top: 10px;
+}
+.login .login__writeup__link a {
+  color: #C5D86D;
+  padding-left: 3px;
+}
+@media (max-width: 768px) {
+  .login__container {
+    padding: 10% 9%;
+    padding-bottom: 20%;
+    overflow: hidden;
+  }
+  .login__writeup form {
+    display: flex;
+    flex-direction: column;
+  }
+  .login__writeup form label {
+    padding-bottom: 3px;
+  }
+  .login__writeup form label[for=password] {
+    margin-top: 7px;
+  }
+  .login__writeup form label[for=email] {
+    margin-top: 9px;
+  }
+  .login__writeup form input[type=email], .login__writeup form input[type=password] {
+    width: 73%;
+    margin-bottom: 9px;
+    font-size: 13px;
+  }
+  .login__writeup form input[type=password] {
+    margin-bottom: 12px;
+  }
+  .login__writeup form input[type=button] {
+    margin-bottom: 8px;
+  }
+  .login__writeup__submit_button {
+    margin-top: 10px;
+  }
+  .login__writeup i {
+    position: absolute;
+    font-size: 20px;
+    padding-left: 20px;
+  }
+  .login__writeup i.bxs-log-in-circle {
+    color: 900;
+    padding-left: 10px;
+    cursor: pointer;
+  }
+  .login__image {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 30px;
+  }
+  .login__image img {
+    width: 75%;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .login__container {
+    padding: 10% 9%;
+    padding-bottom: 20%;
+  }
+  .login__writeup form {
+    display: flex;
+    flex-direction: column;
+  }
+  .login__writeup form label {
+    padding-bottom: 3px;
+  }
+  .login__writeup form label[for=password] {
+    margin-top: 7px;
+  }
+  .login__writeup form label[for=email] {
+    margin-top: 9px;
+  }
+  .login__writeup form input[type=email], .login__writeup form input[type=password] {
+    width: 88%;
+    margin-bottom: 9px;
+    font-size: 13px;
+  }
+  .login__writeup form input[type=password] {
+    margin-bottom: 12px;
+  }
+  .login__writeup form input[type=button] {
+    margin-bottom: 8px;
+  }
+  .login__writeup__submit_button {
+    margin-top: 10px;
+  }
+  .login__writeup i {
+    position: absolute;
+    font-size: 20px;
+    padding-left: 20px;
+  }
+  .login__writeup i.bxs-log-in-circle {
+    color: 900;
+    padding-left: 10px;
+    cursor: pointer;
+  }
+  .login__image {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 30px;
+  }
+  .login__image img {
+    width: 50%;
+  }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+  .login__container {
+    padding: 0 9%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+  }
+  .login__writeup form {
+    display: flex;
+    flex-direction: column;
+  }
+  .login__writeup form label {
+    padding-bottom: 3px;
+  }
+  .login__writeup form label[for=password] {
+    margin-top: 7px;
+  }
+  .login__writeup form label[for=email] {
+    margin-top: 9px;
+  }
+  .login__writeup form input[type=email], .login__writeup form input[type=password] {
+    width: 80%;
+    margin-bottom: 9px;
+    font-size: 13px;
+  }
+  .login__writeup form input[type=password] {
+    margin-bottom: 12px;
+  }
+  .login__writeup form input[type=button] {
+    margin-bottom: 8px;
+  }
+  .login__writeup__submit_button {
+    margin-top: 10px;
+  }
+  .login__writeup i {
+    position: absolute;
+    font-size: 20px;
+    padding-left: 20px;
+  }
+  .login__writeup i.bxs-log-in-circle {
+    color: 900;
+    padding-left: 10px;
+    cursor: pointer;
+  }
+  .login__image {
+    text-align: center;
+    width: 35%;
+  }
+  .login__image img {
+    width: 100%;
+  }
+}
+@media (min-width: 1200px) {
+  .login__container {
+    padding: 0 9%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+  }
+  .login__writeup {
+    width: 35%;
+  }
+  .login__writeup form {
+    display: flex;
+    flex-direction: column;
+  }
+  .login__writeup form label {
+    padding-bottom: 3px;
+  }
+  .login__writeup form label[for=password] {
+    margin-top: 7px;
+  }
+  .login__writeup form label[for=email] {
+    margin-top: 9px;
+  }
+  .login__writeup form input[type=email], .login__writeup form input[type=password] {
+    width: 100%;
+    margin-bottom: 9px;
+    font-size: 13px;
+  }
+  .login__writeup form input[type=password] {
+    margin-bottom: 12px;
+  }
+  .login__writeup form input[type=button] {
+    margin-bottom: 8px;
+  }
+  .login__writeup__submit_button {
+    margin-top: 10px;
+  }
+  .login__writeup i {
+    position: absolute;
+    font-size: 20px;
+    padding-left: 20px;
+  }
+  .login__writeup i.bxs-log-in-circle {
+    color: 900;
+    padding-left: 10px;
+    cursor: pointer;
+  }
+  .login__image {
+    text-align: center;
+  }
+  .login__image img {
+    width: 80%;
+  }
+}/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,351 @@
+.login {
+    background-color: $chineseBlack;
+    color: $white;
+    font-weight: $medium;
+
+    &__container {
+        height: 100vh;
+    }
+
+    label {
+        font-weight: $medium;
+    }
+
+    input[type="email"], input[type="password"] {
+        background-color: transparent;
+        border: 3px solid $white;
+        border-radius: 7px;
+        padding: 10px 40px;
+        color: white;
+        font-family: "Poppins";
+        font-size: $sm;
+    }
+
+    input::placeholder {
+        color: $white;
+        font-weight: $light;
+        font-size: $sm;
+    }
+
+    input[type="button"] {
+        padding: 10px 0px;
+        padding-left: 40px;
+        padding-right: 25px;
+        font-family: "Poppins";
+        font-weight: $bold;
+        background-color: $white;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        transition: all 300ms ease-in-out;
+
+        i {
+            color: $chineseBlack;
+        }
+    }
+
+    .icon {
+        padding: 12px;
+        min-width: 40px;
+    }
+
+    .login__writeup {
+        h2 {
+            color: $chineseGreen;
+        }
+
+        &__logo {
+            width: 170px;
+        }
+
+        &__submit_button {
+            width: 100px;
+            color: $chineseBlack;
+
+            &:hover {
+                input[type="button"] {
+                    color: $chineseBlack;
+                    background-color: $chineseGreen;
+                }
+            }
+        }
+
+        &__link {
+            font-size: $sm;
+            margin-top: 10px;
+            a {
+                color: $chineseGreen;
+                padding-left: 3px;
+            }
+        }
+    }
+
+    @include breakpoints(mobile) {
+        &__container {
+            padding: 10% 9%;
+            padding-bottom: 20%;
+            overflow: hidden;
+        }
+
+        &__writeup {
+            form {
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    padding-bottom: 3px;
+                }
+
+                label[for=password] {
+                    margin-top: 7px;
+                }
+
+                label[for=email] {
+                    margin-top: 9px;
+                }
+
+                input[type="email"], input[type="password"] {
+                    width: 73%;
+                    margin-bottom: 9px;
+                    font-size: $sm + 1px;
+                }
+
+                input[type="password"] {
+                    margin-bottom: 12px;
+                }
+
+                input[type="button"] {
+                    margin-bottom: 8px;
+                }
+            }
+
+            &__submit_button {
+                margin-top: 10px;
+            }
+
+            i {
+                position: absolute;
+                font-size: 20px;
+                padding-left: 20px;
+
+                &.bxs-log-in-circle {
+                    color: $black;
+                    padding-left: 10px;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &__image {
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 30px;
+
+            img {
+                width: 75%;
+            }
+        }
+    }
+
+    @include breakpoints(small) {
+        &__container {
+            padding: 10% 9%;
+            padding-bottom: 20%;
+        }
+
+        &__writeup {
+            form {
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    padding-bottom: 3px;
+                }
+
+                label[for=password] {
+                    margin-top: 7px;
+                }
+
+                label[for=email] {
+                    margin-top: 9px;
+                }
+
+                input[type="email"], input[type="password"] {
+                    width: 88%;
+                    margin-bottom: 9px;
+                    font-size: $sm + 1px;
+                }
+
+                input[type="password"] {
+                    margin-bottom: 12px;
+                }
+
+                input[type="button"] {
+                    margin-bottom: 8px;
+                }
+            }
+
+            &__submit_button {
+                margin-top: 10px;
+            }
+
+            i {
+                position: absolute;
+                font-size: 20px;
+                padding-left: 20px;
+
+                &.bxs-log-in-circle {
+                    color: $black;
+                    padding-left: 10px;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &__image {
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 30px;
+
+            img {
+                width: 50%;
+            }
+        }
+    }
+
+    @include breakpoints(medium) {
+        &__container {
+            padding: 0 9%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+        }
+
+        &__writeup {
+            form {
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    padding-bottom: 3px;
+                }
+
+                label[for=password] {
+                    margin-top: 7px;
+                }
+
+                label[for=email] {
+                    margin-top: 9px;
+                }
+
+                input[type="email"], input[type="password"] {
+                    width: 80%;
+                    margin-bottom: 9px;
+                    font-size: $sm + 1px;
+                }
+
+                input[type="password"] {
+                    margin-bottom: 12px;
+                }
+
+                input[type="button"] {
+                    margin-bottom: 8px;
+                }
+            }
+
+            &__submit_button {
+                margin-top: 10px;
+            }
+
+            i {
+                position: absolute;
+                font-size: 20px;
+                padding-left: 20px;
+
+                &.bxs-log-in-circle {
+                    color: $black;
+                    padding-left: 10px;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &__image {
+            text-align: center;
+            width: 35%;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+
+    @include breakpoints(large) {
+        &__container {
+            padding: 0 9%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+        }
+
+        &__writeup {
+            width: 35%;
+            form {
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    padding-bottom: 3px;
+                }
+
+                label[for=password] {
+                    margin-top: 7px;
+                }
+
+                label[for=email] {
+                    margin-top: 9px;
+                }
+
+                input[type="email"], input[type="password"] {
+                    width: 100%;
+                    margin-bottom: 9px;
+                    font-size: $sm + 1px;
+                }
+
+                input[type="password"] {
+                    margin-bottom: 12px;
+                }
+
+                input[type="button"] {
+                    margin-bottom: 8px;
+                }
+            }
+
+            &__submit_button {
+                margin-top: 10px;
+            }
+
+            i {
+                position: absolute;
+                font-size: 20px;
+                padding-left: 20px;
+
+                &.bxs-log-in-circle {
+                    color: $black;
+                    padding-left: 10px;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &__image {
+            text-align: center;
+
+            img {
+                width: 80%;
+            }
+        }
+    }
+}

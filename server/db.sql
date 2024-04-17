@@ -20,8 +20,8 @@ create table quiz (
     id serial primary key,
     title text not null,
     description text,
-    date Date not null,
-    time Time not null,
+    date text not null,
+    time text not null,
     duration int not null,
     group_id int,
     foreign key (group_id) references groups(id)
