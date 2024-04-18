@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 
 import LogoWhite from "../assets/images/white-logo.png";
 import LoginImage from "../assets/images/login-img.png";

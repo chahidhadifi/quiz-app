@@ -1,0 +1,74 @@
+.login {
+    &__container {
+
+    }
+
+    &__writeup {
+        form {
+            input[type="text"] {
+                background-color: transparent;
+                border: 3px solid $white;
+                border-radius: 7px;
+                padding: 10px 40px;
+                color: white;
+                font-family: "Poppins";
+                font-size: $sm;
+                width: 73.5%;
+            }
+
+            .fl-container {
+                margin-bottom: 9px;
+            }
+        }
+    }
+
+    @include breakpoints(mobile) {
+        &__writeup {
+            form {
+                div:nth-child(1) {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                input[name="firstname"] {
+                    margin-bottom: 7px;
+                }
+            }
+            
+            .fl-container {
+                width: 100%;
+            }
+        }
+    }
+
+    @include breakpoints(small) {
+        .fl-container {
+            width: 47%;
+            input {
+                width: 100%;
+            }
+        }
+    }
+
+    @include breakpoints(medium) {
+        .fl-container {
+            width: 37%;
+            margin-right: 10%;
+            
+            input {
+                width: 100%;
+            }
+        }
+    }
+
+    @include breakpoints(large) {
+        .fl-container {
+            width: 47%;
+            margin-right: -12.5%;
+
+            input {
+                width: 100%;
+            }
+        }
+    }
+}
