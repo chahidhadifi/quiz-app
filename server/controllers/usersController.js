@@ -1,5 +1,11 @@
 const pool = require("../db");
 
+const cookieParser = require("cookie-parser");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+const salt = 10;
+
 const getAllusers = async (req, res) => {
   try {
     const allGroups = await pool.query("select * from users");
@@ -15,12 +21,6 @@ const getUniqueUser = async(req,res)=>{
     res.json(uniqueUser.rows[0]);
 };
 
-const insertUser = async (req,res) => {
-    const { first_name, last_name, email, password, role, group_id } = req.body;
-    const insertedUser = await pool.query("insert into users (first_name, last_name, email, password, role, group_id) values ($1,$2,$3,$4,$5,$6) returning *", [first_name, last_name, email, password, role, group_id]);
-    res.json(insertedUser.rows[0])
-};
-
 const updateUser = async (req,res) => {
     const { id } = req.params;
     const { first_name, last_name, email, password, role, group_id} = req.body;
@@ -34,10 +34,77 @@ const deleteUser = async (req,res) => {
       res.json({message:"Deleted"});
 };
 
+const signUp = async (req, res) => {
+  try {
+      const hash = await bcrypt.hash(req.body.password.toString(), salt);
+      const values = [
+          req.body.first_name,
+          req.body.last_name,
+          req.body.email,
+          hash
+      ];
+      pool.query("insert into users(first_name, last_name, email, password) VALUES ($1, $2, $3, $4)", values);
+      res.json({ status: "Success" });
+  } catch (err) {
+      console.error(err.message);
+      res.json({ error: "An error occurred while signing up" });
+  }
+}
+
+const logIn = async (req, res) => {
+  try {
+    const query = await pool.query("select * from users where email=$1", [req.body.email]);
+    const user = query.rows[0];
+
+    if (user) {
+      const match = await bcrypt.compare(req.body.password.toString(), user.password);
+      if (match) {
+        const email = user.email;
+        const token = jwt.sign({email}, "jwt-secret-key", {expiresIn: '1h'});
+        res.cookie('token', token);
+        res.json({ status: "Success" });
+      } else {
+        res.json({ error: "Password not matched" });
+      }
+    } else {
+      res.json({ error: "No email existed" });
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: "An error occurred while logging in" });
+  }
+}
+
+const getUniqueUserByToken = async (req, res) => {
+  const token = req.cookies.token;
+  if (!token) {
+    res.json({error: "You are not authenticated"});
+  } else {
+    jwt.verify(token, "jwt-secret-key",async (err, decoded) => {
+      if (err) {
+        res.json({error: "Token is not correct"});
+      } else {
+        const email = decoded.email;
+        const query = await pool.query("select * from users where email=$1", [email]);
+        const currentUser = query.rows[0];
+        res.json({status: "Success", email: email, first_name: currentUser.first_name, last_name: currentUser.last_name});
+      }
+    })
+  }
+}
+
+const logOut = async (req, res) => {
+  res.clearCookie('token');
+  res.json({status: "Success"});
+}
+
 module.exports = {
   getAllusers,
   getUniqueUser,
-  insertUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  signUp,
+  logIn,
+  getUniqueUserByToken,
+  logOut
 }
