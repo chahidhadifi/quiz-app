@@ -27,7 +27,7 @@
         font-size: $sm;
     }
 
-    input[type="button"] {
+    input[type="submit"]{
         padding: 10px 0px;
         padding-left: 40px;
         padding-right: 25px;
@@ -63,7 +63,7 @@
             color: $chineseBlack;
 
             &:hover {
-                input[type="button"] {
+                input[type="submit"] {
                     color: $chineseBlack;
                     background-color: $chineseGreen;
                 }
@@ -114,7 +114,7 @@
                     margin-bottom: 12px;
                 }
 
-                input[type="button"] {
+                input[type="submit"] {
                     margin-bottom: 8px;
                 }
             }
@@ -180,7 +180,7 @@
                     margin-bottom: 12px;
                 }
 
-                input[type="button"] {
+                input[type="submit"] {
                     margin-bottom: 8px;
                 }
             }
@@ -249,7 +249,7 @@
                     margin-bottom: 12px;
                 }
 
-                input[type="button"] {
+                input[type="submit"] {
                     margin-bottom: 8px;
                 }
             }
@@ -318,7 +318,7 @@
                     margin-bottom: 12px;
                 }
 
-                input[type="button"] {
+                input[type="submit"] {
                     margin-bottom: 8px;
                 }
             }

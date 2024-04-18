@@ -41,6 +41,37 @@ h5 {
   cursor: default;
 }
 
+.alert {
+  min-height: 20px;
+  width: 560px;
+  max-width: 90%;
+  border-radius: 12px;
+  padding: 16px 22px 17px 20px;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.alert-warning {
+  background: #e41749;
+}
+
+.alert i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert .icon__wrapper span {
+  font-size: 21px;
+  color: #fff;
+}
+
+.alert p {
+  color: #fff;
+  margin-left: 50px;
+}
+
 .login {
   background-color: #0D1321;
   color: #FFFFFF;
@@ -66,7 +97,7 @@ h5 {
   font-weight: 300;
   font-size: 12px;
 }
-.login input[type=button] {
+.login input[type=submit] {
   padding: 10px 0px;
   padding-left: 40px;
   padding-right: 25px;
@@ -78,7 +109,7 @@ h5 {
   cursor: pointer;
   transition: all 300ms ease-in-out;
 }
-.login input[type=button] i {
+.login input[type=submit] i {
   color: #0D1321;
 }
 .login .icon {
@@ -95,7 +126,7 @@ h5 {
   width: 100px;
   color: #0D1321;
 }
-.login .login__writeup__submit_button:hover input[type=button] {
+.login .login__writeup__submit_button:hover input[type=submit] {
   color: #0D1321;
   background-color: #C5D86D;
 }
@@ -134,7 +165,7 @@ h5 {
   .login__writeup form input[type=password] {
     margin-bottom: 12px;
   }
-  .login__writeup form input[type=button] {
+  .login__writeup form input[type=submit] {
     margin-bottom: 8px;
   }
   .login__writeup__submit_button {
@@ -185,7 +216,7 @@ h5 {
   .login__writeup form input[type=password] {
     margin-bottom: 12px;
   }
-  .login__writeup form input[type=button] {
+  .login__writeup form input[type=submit] {
     margin-bottom: 8px;
   }
   .login__writeup__submit_button {
@@ -239,7 +270,7 @@ h5 {
   .login__writeup form input[type=password] {
     margin-bottom: 12px;
   }
-  .login__writeup form input[type=button] {
+  .login__writeup form input[type=submit] {
     margin-bottom: 8px;
   }
   .login__writeup__submit_button {
@@ -295,7 +326,7 @@ h5 {
   .login__writeup form input[type=password] {
     margin-bottom: 12px;
   }
-  .login__writeup form input[type=button] {
+  .login__writeup form input[type=submit] {
     margin-bottom: 8px;
   }
   .login__writeup__submit_button {

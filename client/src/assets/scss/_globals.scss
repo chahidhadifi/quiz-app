@@ -44,3 +44,34 @@ h4,
 h5 {
     cursor: default;
 }
+
+.alert {
+  min-height: 20px;
+  width: 560px;
+  max-width: 90%;
+  border-radius: 12px;
+  padding: 16px 22px 17px 20px;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.alert-warning {
+  background: #e41749;
+}
+
+.alert i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert .icon__wrapper span {
+  font-size: 21px;
+  color: #fff;
+}
+
+.alert p {
+  color: #fff;
+  margin-left: 50px;
+}
