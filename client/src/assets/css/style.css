@@ -400,4 +400,45 @@ h5 {
   .login .fl-container input {
     width: 100%;
   }
+}
+
+.page__not__found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #0D1321;
+}
+.page__not__found img {
+  width: 40%;
+}
+.page__not__found p {
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 40px;
+}
+.page__not__found__btn {
+  padding: 10px 25px;
+  font-family: "Poppins";
+  font-weight: 700;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+  text-decoration: none;
+  color: #0D1321;
+  display: flex;
+  align-items: center;
+}
+.page__not__found__btn i {
+  font-size: 18px;
+  margin-right: 8px;
+  font-weight: 700;
+}
+.page__not__found__btn:hover {
+  color: #0D1321;
+  background-color: #C5D86D;
 }/*# sourceMappingURL=style.css.map */
