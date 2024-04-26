@@ -19,6 +19,16 @@ const getGroupById = async (req, res) => {
     }
 }
 
+const getGroupByName = async (req, res) => {
+    try {
+        const name = req.params.name;
+        const query = await pool.query('select * from groups where name=$1', [name]);
+        res.json(query.rows[0]);
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+
 const createGroup = async (req, res) => {
     try {
         const { name } = req.body;
@@ -55,5 +65,6 @@ module.exports = {
     getGroupById,
     createGroup,
     updateGroup,
-    deleteGroup
+    deleteGroup,
+    getGroupByName
 };

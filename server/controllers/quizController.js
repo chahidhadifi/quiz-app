@@ -1,13 +1,32 @@
 const pool = require("../db");
 
-const getAllQuizzes = async (req, res) => {
+const getAllQuizzesByGroupId = async (req, res) => {
   try {
-    const allQuizzes = await pool.query("select * from quiz");
-    res.json(allQuizzes.rows);
+    const group_id = req.params.group_id;
+    const query = await pool.query("select * from quiz where group_id=$1", [group_id]);
+    res.json(query.rows);
   } catch (err) {
     console.log(err.message);
   }
 };
+
+const getAllQuizzes = async (req, res) => {
+    try {
+      const query = await pool.query("select * from quiz where TO_TIMESTAMP(date || ' ' || time, 'YYYY-MM-DD HH:MI') >= CURRENT_TIMESTAMP");
+      res.json(query.rows);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+const getCompletedQuizzes = async (req, res) => {
+    try {
+        const query = await pool.query("SELECT q.title, g.name, COUNT(u.group_id) AS user_count, q.date FROM quiz q JOIN \"groups\" g ON q.group_id = g.id LEFT JOIN users u ON u.group_id = g.id WHERE TO_TIMESTAMP(date, 'YYYY-MM-DD') <= CURRENT_TIMESTAMP GROUP BY q.title, g.name, q.date");
+        res.json(query.rows);
+    } catch (err) {
+        console.log(err.message);
+    }
+}
 
 const getQuizById = async (req, res) => {
     try {
@@ -52,6 +71,8 @@ const deleteQuiz = async (req, res) => {
 
 module.exports = {
     getAllQuizzes,
+    getAllQuizzesByGroupId,
+    getCompletedQuizzes,
     getQuizById,
     createQuiz,
     updateQuiz,

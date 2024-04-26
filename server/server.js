@@ -19,7 +19,7 @@ const usersRoutes = require("./routes/usersRoutes");
 
 app.use("/api/v1/groups", groupsRoutes);
 app.use("/api/v1/questions", questionRoutes);
-app.use("/api/v1/quizzes", quizRoutes);
+app.use("/api/v1/quiz", quizRoutes);
 app.use("/api/v1/results", resultRoutes);
 app.use("/api/v1/users", usersRoutes);
 

@@ -8,7 +8,20 @@ const salt = 10;
 
 const getAllusers = async (req, res) => {
   try {
-    const allGroups = await pool.query("select * from users");
+    const allGroups = await pool.query("select * from users where role!='admin'");
+    res.json(allGroups.rows);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+const getAllusersByGroup = async (req, res) => {
+  try {
+    const groupName = req.query.groupName;
+    const allGroups = await pool.query(
+      "SELECT users.* FROM users INNER JOIN groups ON users.group_id = groups.id WHERE groups.name = $1",
+      [groupName]
+    );
     res.json(allGroups.rows);
   } catch (err) {
     console.log(err.message);
@@ -87,7 +100,7 @@ const getUniqueUserByToken = async (req, res) => {
         const email = decoded.email;
         const query = await pool.query("select * from users where email=$1", [email]);
         const currentUser = query.rows[0];
-        res.json({status: "Success", email: email, first_name: currentUser.first_name, last_name: currentUser.last_name});
+        res.json({status: "Success", email: email, first_name: currentUser.first_name, last_name: currentUser.last_name, role: currentUser.role, group_id: currentUser.group_id});
       }
     })
   }
@@ -100,6 +113,7 @@ const logOut = async (req, res) => {
 
 module.exports = {
   getAllusers,
+  getAllusersByGroup,
   getUniqueUser,
   updateUser,
   deleteUser,

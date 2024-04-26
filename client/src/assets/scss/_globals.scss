@@ -1,4 +1,4 @@
-tml {
+html {
     font-size: 100%;
     box-sizing: border-box;
 }
@@ -39,7 +39,6 @@ body {
 
 h1,
 h2,
-h3,
 h4,
 h5 {
     cursor: default;
@@ -74,4 +73,272 @@ h5 {
 .alert p {
   color: #fff;
   margin-left: 50px;
+}
+
+i {
+  font-size: 20px;
+}
+
+.menu {
+  display: none !important;
+  background-color: $chineseBlack;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+
+  i {
+    img {
+      width: 38px;
+      margin-top: 10px;
+    }
+  }
+
+  .close {
+      color: $white;
+      font-size: 23px;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+  }
+
+  div {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 30px;
+
+      h4 {
+          margin: 0;
+          color: $white;
+      }
+
+      h5 {
+          margin: 0;
+          color: $chineseGreen;
+      }
+
+      i {
+          padding-top: 10px;
+          color: $white;
+          font-size: 30px;
+      }
+  }
+
+  a {
+      text-decoration: none;
+      color: $white;
+      font-weight: $bold;
+      padding: 10px 90px;
+
+      &:nth-child(1) {
+          padding-top: 120px;
+      }
+
+      &:nth-child(4) {
+          padding-bottom: 40px;
+      }
+  }
+
+  i.bx-log-out {
+      padding-top: 40px;
+  }
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Nunito";
+  width: 125px;
+  height: 40px;
+  background-color: transparent;
+  border: 2px solid $gray;
+  border-radius: 40px;
+  padding: 1px 12px;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+
+  i {
+      font-size: 20px;
+  }
+
+  h3 {
+      margin: 0;
+  }
+
+  &:hover {
+      background-color: $chineseBlack;
+      color: $white;
+  }
+}
+
+i {
+  font-size: 20px;
+}
+
+.menu {
+  display: none !important;
+  background-color: $chineseBlack;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 20;
+  height: 100vh;
+
+  .close {
+      color: $white;
+      font-size: 23px;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+  }
+
+  div {
+      display: flex;
+      flex-direction: column;
+      padding-top: 10%;
+      padding-bottom: 30px;
+
+      h4 {
+          margin: 0;
+          color: $white;
+      }
+
+      h5 {
+          margin: 0;
+          color: $chineseGreen;
+      }
+
+      i {
+          padding-top: 10px;
+          color: $white;
+      }
+  }
+
+  a {
+      text-decoration: none;
+      color: $white;
+      font-weight: $bold;
+      padding: 10px 90px;
+
+      &:nth-child(1) {
+          padding-top: 120px;
+      }
+
+      &:nth-child(4) {
+          padding-bottom: 40px;
+      }
+  }
+
+  i.bx-log-out {
+      padding-top: 40px;
+  }
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Poppins";
+  font-weight: $bold;
+  width: 125px;
+  height: 40px;
+  background-color: transparent;
+  border: 2px solid $gray;
+  border-radius: 40px;
+  padding: 1px 12px;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+
+  i {
+      font-size: 20px;
+  }
+
+  h4 {
+      margin: 0;
+      padding-right: 4px;
+      cursor: pointer;
+  }
+
+  &:hover {
+      background-color: $chineseBlack;
+      color: $white;
+  }
+}
+
+.dashboard {
+  &__navbar {
+      border-bottom: 1px solid $gray;
+      margin-bottom: 20px;
+  }
+
+  &__navbar__user {
+      display: flex;
+      flex-direction: column;
+
+      h4 {
+          margin: 0;
+      }
+
+      h5 {
+          margin: 0;
+          color: $chineseGreen;
+      }
+  }
+}
+
+#style-3::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+#style-3::-webkit-scrollbar {
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+#style-3::-webkit-scrollbar-thumb {
+	background-color: $chineseGreen;
+}
+
+.scrollbar {
+	// margin-left: 30px;
+	// float: left;
+	height: 590px;
+	// width: 65px;
+	overflow-y: scroll;
+    // overflow-x: hidden;
+	// margin-bottom: 25px;
+}
+
+.scrollbar-upcoming-quizzes {
+	// margin-left: 30px;
+	// float: left;
+	height: 350px;
+	// width: 65px;
+	overflow-y: scroll;
+    // overflow-x: hidden;
+	// margin-bottom: 25px;
+}
+
+.scrollbar-completed-quizzes {
+    height: 222px;
+    overflow-y: scroll;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
 }
