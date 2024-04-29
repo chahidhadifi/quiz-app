@@ -10,6 +10,7 @@ import Logout from '../assets/images/logout.png'
 import Notifications from '../assets/images/notification.png'
 
 import SideNavbar from '../components/SideNavbar'
+import Navbar from '../components/Navbar'
 
 const Dashboard = () => {
     const [auth, setAuth] = useState(true);
@@ -34,31 +35,31 @@ const Dashboard = () => {
     const [currentDateTime, setCurrentDateTime] = useState(null);
     const [completedQuizzes, setCompletedQuizzes] = useState(null);
 
-    const menuIcon = useRef(null);
-    const closeIcon = useRef(null);
-    const menu = useRef(null);
-    const [menuIsOpened, setMenuIsOpened] = useState(false);
+    // const menuIcon = useRef(null);
+    // const closeIcon = useRef(null);
+    // const menu = useRef(null);
+    // const [menuIsOpened, setMenuIsOpened] = useState(false);
 
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
 
-    const handleMenuIcon = () => {
-        if (!menuIsOpened) {
-            menu.current.classList.remove("fade-out");
-            menu.current.classList.add("fade-in");
-            menu.current.setAttribute("style", "display: block !important;");
-            setMenuIsOpened(true);
-        }
-    };
+    // const handleMenuIcon = () => {
+    //     if (!menuIsOpened) {
+    //         menu.current.classList.remove("fade-out");
+    //         menu.current.classList.add("fade-in");
+    //         menu.current.setAttribute("style", "display: block !important;");
+    //         setMenuIsOpened(true);
+    //     }
+    // };
 
-    const handleCloseIcon = () => {
-        if (menuIsOpened) {
-            menu.current.classList.remove("fade-in");
-            menu.current.classList.add("fade-out");
-            menu.current.setAttribute("style", "display: none !important;");
-            setMenuIsOpened(false);
-        }
-    };
+    // const handleCloseIcon = () => {
+    //     if (menuIsOpened) {
+    //         menu.current.classList.remove("fade-in");
+    //         menu.current.classList.add("fade-out");
+    //         menu.current.setAttribute("style", "display: none !important;");
+    //         setMenuIsOpened(false);
+    //     }
+    // };
 
     // ! ---------------- Member page ---------------------
     const getUserData = () => {
@@ -176,15 +177,15 @@ const Dashboard = () => {
         })
     }
 
-    const handleLogout = () => {
-        axios.get('http://localhost:5000/api/v1/users/logout')
-        .then(res => {
-          location.reload(true);
-        })
-        .catch(err => {
-          console.log(err);
-        })
-    }
+    // const handleLogout = () => {
+    //     axios.get('http://localhost:5000/api/v1/users/logout')
+    //     .then(res => {
+    //       location.reload(true);
+    //     })
+    //     .catch(err => {
+    //       console.log(err);
+    //     })
+    // }
     // ! --------------------------------
 
     useEffect(() => {
@@ -196,8 +197,11 @@ const Dashboard = () => {
         getAllQuizzesForAdmin();
         getCurrentDateTime();
         getCompletedQuizzes();
-        getAllUsers();
     }, [currentDateTime, userGroupId]);
+
+    useEffect(() => {
+        getAllUsers();
+    }, []);
 
     return (
         <div>
@@ -216,42 +220,7 @@ const Dashboard = () => {
                     (role=='admin') ?
                     <div>
                         <div className="dashboard">
-                            <div className="dashboard__navbar">
-                                <div>
-                                    <img src={BlackLogo} alt="Logo"/>
-                                </div>
-                                <div>
-                                    <div className="dashboard__navbar__icons">
-                                        <i className='bx bx-menu menu-icon' ref={menuIcon} onClick={handleMenuIcon}></i>
-                                    </div>
-                                    <div className="dashboard__navbar__user">
-                                        <div className="flex flex-fd-c" style={{textTransform: 'capitalize'}}>
-                                            <h4>{ firstName + " " + lastName }</h4>
-                                            <h5>{ role }</h5>
-                                        </div>
-                                        <div>
-                                            {/* <img src={Notifications} alt="Notification" /> */}
-                                            <img src={Logout} alt="Logout" onClick={handleLogout} />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="menu" ref={menu}>
-                                    <div>
-                                        <Link to="/">Dashboard</Link>
-                                        <Link to="/quizzes">Quizzes</Link>
-                                        <Link to="/members">Members</Link>
-                                        <Link to="/results">Results</Link>
-                                        <div style={{textTransform: 'capitalize'}}>
-                                            <h4>{ firstName + " " + lastName }</h4>
-                                            <h5>{ role }</h5>
-                                            <i className='' >
-                                                <img src={Logout} alt="Logout" onClick={handleLogout} />
-                                            </i>
-                                        </div>
-                                        <i className='bx bx-x close' ref={closeIcon} onClick={handleCloseIcon}></i>
-                                    </div>
-                                </div>
-                            </div>
+                            <Navbar firstName={firstName} lastName={lastName} role={role} ></Navbar>
                             <div className="dashboard__main">
                                 <SideNavbar></SideNavbar>
                                 <div className="dashboard__content">
@@ -260,7 +229,7 @@ const Dashboard = () => {
                                             <div className="dashboard__upcoming__quizzes__title">
                                                 <h3>Upcoming quizzes</h3>
                                                 <div>
-                                                    <h5>Quiz directory</h5>
+                                                    <Link className='link' to="/quizzes"><h5>Quiz directory</h5></Link>
                                                     <i className='bx bx-right-arrow-alt' ></i>
                                                 </div>
                                             </div>
@@ -286,7 +255,7 @@ const Dashboard = () => {
                                             <div className="dashboard__completed_quizzes__title">
                                                 <h3>Completed quizzes</h3>
                                                 <div>
-                                                    <h5>Results</h5>
+                                                    <Link className='link' to="/results"><h5>Results</h5></Link>
                                                     <i className='bx bx-right-arrow-alt' ></i>
                                                 </div>
                                             </div>
@@ -317,7 +286,7 @@ const Dashboard = () => {
                                             <div className="dashboard__members_list__title">
                                                 <h3>Members list</h3>
                                                 <div>
-                                                    <h5>Members directory</h5>
+                                                    <Link className='link' to="/members"><h5>Members directory</h5></Link>
                                                     <i className='bx bx-right-arrow-alt' ></i>
                                                 </div>
                                             </div>

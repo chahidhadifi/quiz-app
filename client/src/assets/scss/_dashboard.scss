@@ -38,6 +38,7 @@
             margin-bottom: 8px;
             width: 90%;
             cursor: pointer !important;
+            z-index: -1;
 
             img {
                 width: 100px;
@@ -313,111 +314,11 @@
         }
     }
 
-    .item-selected {
-        border-right: 3px solid $chineseBlack;
-    }
-
     @include breakpoints(medium) {
-        .menu-icon {
-            display: none;
-        }
-
-        &__navbar {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            padding: 27px 40px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background-color: $white;
-            z-index: 2;
-
-            img {
-                width: 90px;
-                margin-right: 20px;
-            }
-
-            &__icons {
-                i:not(:last-child) {
-                    padding-right: 5px;
-                }
-            }
-        }
-
-        &__navbar__user {
-            display: block;
-            padding: 22.5px 10px;
-            position: absolute;
-            right: 0;
-            z-index: 2;
-            transition: all 200ms ease-in-out;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-
-            img {
-                width: 35px;
-                cursor: pointer;
-                transition: 200ms all ease-in-out;
-
-                &:first-child {
-                    margin-left: 20px;
-                }
-            }
-        }
-
-        .dashboard__navbar {
-            div {
-                display: flex;
-                align-items: center;
-
-                &:nth-child(1) {
-                    margin-right: 20px;
-                }
-            }
-        }
-
         &__main {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-        }
-
-        &__sidebar {
-            width: 250px;
-            border-right: 1px solid $gray;
-            margin-top: -21px;
-            position: fixed;
-            left: 0;
-            top: 92px;
-    
-            &__options {
-                &__item {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 10px;
-                    padding-left: 20px;
-
-                    h3 {
-                        margin-right: 50px;
-                        width: 80px;
-                    }
-
-                    img {
-                        width: 20%;
-                    }
-
-                    &:hover {
-                        background-color: $chineseBlack;
-                        color: $white;
-                    }
-                }
-            }
         }
 
         &__content {
@@ -428,147 +329,9 @@
     }
 
     @include breakpoints(large) {
-        .menu-icon {
-            display: none;
-        }
-
-        &__navbar {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            padding: 30px 90px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 2;
-
-            img {
-                width: 100px;
-                margin-right: 20px;
-            }
-
-            &__icons {
-                i:not(:last-child) {
-                    padding-right: 5px;
-                }
-            }
-        }
-
-        &__navbar__user {
-            display: block;
-            padding: 22.5px 10px;
-            position: absolute;
-            right: 0;
-            z-index: 2;
-            transition: all 200ms ease-in-out;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-
-            img {
-                width: 35px;
-                cursor: pointer;
-                transition: 200ms all ease-in-out;
-
-                &:first-child {
-                    margin-left: 20px;
-                }
-            }
-        }
-        
-        &__navbar__icons {
-            i:nth-child(1) {
-                position: absolute;
-                right: 0;
-                left: 81.5%;
-                padding: 30px 30px;
-                border-left: 1px solid $gray;
-                z-index: 1;
-                transition: all 200ms ease-in-out;
-            }
-        }
-
-        .dashboard__navbar {
-            div {
-                display: flex;
-                align-items: center;
-
-                &:nth-child(1) {
-                    margin-right: 20px;
-                }
-            }
-        }
-
         &__main {
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
-        }
-
-        &__sidebar {
-            width: 250px;
-            height: 100vh;
-            border-right: 1px solid $gray;
-            margin-top: -21px;
-            position: fixed;
-            left: 0;
-            top: 102px;
-    
-            &__options {
-                &__item {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 10px;
-                    padding-left: 20px;
-                    transition: all 200ms ease-in-out;
-
-                    h3 {
-                        margin-right: 50px;
-                        width: 80px;
-                    }
-
-                    img {
-                        width: 20%;
-                    }
-
-                    &:hover {
-                        background-color: $chineseBlack;
-                        color: $white;
-                    }
-                }
-
-                &__item__logout {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 10px;
-                    padding-left: 20px;
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    transition: all 200ms ease-in-out;
-                    margin-bottom: 50%;
-
-                    h3 {
-                        margin-right: 50px;
-                        width: 80px;
-                    }
-
-                    img {
-                        width: 20%;
-                    }
-
-                    &:hover {
-                        background-color: $chineseBlack;
-                        color: $white;
-                    }
-                }
-            }
         }
 
         &__content {
@@ -576,6 +339,8 @@
             padding-top: 100px;
             display: flex;
             align-items: start;
+            margin-right: 100%;
+
 
             &__item {
                 width: 630px;
