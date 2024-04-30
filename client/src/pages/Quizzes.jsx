@@ -181,10 +181,12 @@ const Dashboard = () => {
                                 <SideNavbar></SideNavbar>
                                 <div className="dashboard__content" style={{display: "flex", flexDirection: "column"}}>
                                 <div>
-                                    <button class="btn new-quiz">
-                                        <i class='bx bxs-add-to-queue'></i>
-                                        <h4>New quiz</h4>
-                                    </button>
+                                    <Link to='/new-quiz' style={{textDecoration: 'none'}}>
+                                        <button class="btn new-quiz">
+                                            <i class='bx bxs-add-to-queue'></i>
+                                            <h4>New quiz</h4>
+                                        </button>
+                                    </Link>
                                 </div>
                                 <div class="quizzes__content__item">
                                     <div class="quizzes__upcoming__quizzes">
