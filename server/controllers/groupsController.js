@@ -51,14 +51,22 @@ const updateGroup = async (req, res) => {
 }
 
 const deleteGroup = async (req, res) => {
+    const client = await pool.connect();
     try {
+        await client.query('BEGIN');
         const { id } = req.params;
-        const deletedGroup = await pool.query("delete from groups where id=$1 returning *", [id]);
-        res.json({"message": "item deleted successfully"})
+        await client.query("DELETE FROM users WHERE group_id = $1", [id]);
+        await client.query("DELETE FROM groups WHERE id = $1", [id]);
+        await client.query('COMMIT');
+        res.json({"message": "Item deleted successfully"});
     } catch (err) {
-        console.log(err.message);
+        await client.query('ROLLBACK');
+        console.error(err.message);
+        res.status(500).json({"error": "An error occurred"});
+    } finally {
+        client.release();
     }
-}
+};
 
 module.exports = {
     getAllGroups,

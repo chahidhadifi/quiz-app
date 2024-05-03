@@ -10,6 +10,7 @@ import NewQuiz from './pages/NewQuiz'
 import Members from './pages/Members'
 import MemberInfo from './pages/MemberInfo'
 import CreateGroup from './pages/CreateGroup'
+import ManageGroups from './pages/ManageGroups'
 
 const App = () => {
   return (
@@ -22,9 +23,8 @@ const App = () => {
         <Route path='/new-quiz' element={<NewQuiz/>}></Route>
         <Route path='/members' element={<Members/>}></Route>
         <Route path='/members/member-info/:id' element={<MemberInfo/>}></Route>
-        // TODO
         <Route path='/create-group' element={<CreateGroup/>}></Route>
-        <Route path='/manage-groups'></Route>
+        <Route path='/manage-groups' element={<ManageGroups/>}></Route>
         
         <Route path='/*' element={<PageNotFound/>}></Route>
       </Routes>

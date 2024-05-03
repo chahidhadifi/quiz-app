@@ -1532,4 +1532,26 @@ i {
     background-color: #C5D86D;
     color: #0D1321;
   }
+}
+
+.select select {
+  border: none;
+  font-family: "Poppins";
+}
+.select select:focus {
+  outline: none;
+}
+
+.btnn {
+  padding: 10px 0px;
+  padding-left: 40px;
+  padding-right: 25px;
+  font-family: "Poppins";
+  font-weight: 700;
+  background-color: #0D1321;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+  color: #FFFFFF;
 }/*# sourceMappingURL=style.css.map */
