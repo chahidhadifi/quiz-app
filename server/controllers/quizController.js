@@ -41,7 +41,7 @@ const getQuizById = async (req, res) => {
 const createQuiz = async (req, res) => {
     try {
         const { title, description, date, time, duration, group_id } = req.body;
-        const createdQuiz = await pool.query("insert into quiz(title, description, date, time, duration, group_id) values ($1, $2, $3, $4, $5, $6) returning *", [title, description, date, time, duration, group_id]);
+        const createdQuiz = await pool.query("insert into quiz(title, description, date, time, duration, group_id) values ($1, $2, $3, $4, $5, $6)", [title, description, date, time, duration, group_id]);
         res.json(createdQuiz.rows[0]);
     } catch (err) {
         console.log(err.message);

@@ -28,6 +28,8 @@ const ManageGroups = () => {
             setFirstName(res.data.first_name);
             setLastName(res.data.last_name);
             setRole(res.data.role);
+          } else if (res.data.error) {
+            navigate('/login');
           }
         })
         .catch(err => {

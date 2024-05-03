@@ -8,6 +8,12 @@
 
     img {
         width: 40%;
+
+        @include breakpoints(mobile) {
+            & {
+                width: 80%;
+            }
+        }
     }
 
     p {
@@ -15,6 +21,8 @@
         font-weight: $bold;
         font-size: 20px;
         margin-top: 40px;
+        padding: 0 20px;
+        text-align: center;
     }
 
     &__btn {

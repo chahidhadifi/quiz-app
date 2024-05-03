@@ -10,6 +10,30 @@ const NewQuiz = () => {
     const [lastName, setLastName] = useState(null);
     const [role, setRole] = useState(null);
 
+    const [values, setValues] = useState({
+        title: '',
+        description: '',
+        date: '',
+        time: '',
+        duration: '',
+        group_id: ''
+    });
+
+    const navigate = useNavigate();
+    axios.defaults.withCredentials = true;
+
+    const [groups, setGroups] = useState(null);
+
+    const getAllGroups = () => {
+        axios.get('http://localhost:5000/api/v1/groups')
+        .then(res => {
+          setGroups(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
+
     const getUserData = () => {
         axios.get('http://localhost:5000/api/v1/users/token')
         .then(res => {
@@ -17,6 +41,8 @@ const NewQuiz = () => {
             setFirstName(res.data.first_name);
             setLastName(res.data.last_name);
             setRole(res.data.role);
+          } else if (res.data.error) {
+            navigate('/login');
           }
         })
         .catch(err => {
@@ -24,8 +50,52 @@ const NewQuiz = () => {
         });
     };
 
+    const timeToMinutes = (time) => {
+        const [hours, minutes] = time.split(':').map(Number);
+        const totalMinutes = hours * 60 + minutes;
+        return totalMinutes;
+    }
+
+    const getGroupIdByName = (groupName) => {
+        if (groupName == '-') {
+            return null;
+        } else {
+            const foundGroup = groups.find(group => group.name == groupName);
+            return foundGroup ? foundGroup.id : null;
+        }
+    };
+
+    const createNewQuiz = () => {
+        const totalMinutes = timeToMinutes(values.time);
+        let groupId = null;
+        if (values.group_id == null || values.group_id == 'All groups') {
+            groupId = null;
+        } else {
+            groupId = getGroupIdByName(values.group_id);
+        }
+        // Update values locally first
+        const updatedValues = {
+            ...values,
+            duration: totalMinutes.toString(),
+            group_id: groupId
+        };
+        setValues(updatedValues);
+        // Then, make the POST request with the updated values
+        axios.post('http://localhost:5000/api/v1/quiz', updatedValues)
+            .then(res => {
+                if (res.statusText === 'OK') {
+                    navigate('/quizzes');
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+    
+
     useEffect(() => {
         getUserData();
+        getAllGroups();
     }, []);
 
     return (
@@ -44,80 +114,49 @@ const NewQuiz = () => {
                                     </Link>
                                 </div>
                                 <div class="quizzes__content__item">
-                                    {/* <div class="quizzes__upcoming__quizzes" style={{width: '800px'}}>
-                                        <div class="quizzes__upcoming__quizzes__title">
-                                            <h2>Data Structures</h2>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__datetime">
-                                            <div>
-                                                <i class='bx bxs-calendar' ></i>
-                                                <p>12 / 03 / 2024</p>
-                                            </div>
-                                            <div>
-                                                <i class='bx bxs-time-five' ></i>
-                                                <p>09 : 00</p>
-                                            </div>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__option__v1">
-                                            <p>Duration</p>
-                                            <p>30 minutes</p>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__option__v1">
-                                            <p>Number of questions</p>
-                                            <p>15</p>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__option__v1">
-                                            <p>Score per question</p>
-                                            <p>1</p>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__option__v2">
-                                            <p>Description</p>
-                                            <p>
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur
-                                                rerum excepturi quam. Explicabo, voluptatum iusto maxime 
-                                                velit porro, dolore libero perferendis ab ipsam exercitationem
-                                                maiores, harum mollitia. A, voluptas ipsa.
-                                            </p>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__button">
-                                            <button>
-                                                <i class='bx bxs-pencil' ></i>
-                                                <p>Edit</p>
-                                            </button>
-                                        </div>
-                                    </div> */}
                                     <div class="quizzes__upcoming__quizzes new__quiz" style={{width: '800px'}}>
-                                        <form>
+                                        <div>
                                             <div className='new__quiz__title'>
                                                 <h3>Set up a new quiz</h3>
                                             </div>
                                             <div className='new__quiz__inputs'>
                                                 <div className='new__quiz__input'>
                                                     <div>Title: </div>
-                                                    <input type="text" />
+                                                    <input type="text" onChange={e => setValues({...values, title: e.target.value})} />
                                                 </div>
                                                 <div className='new__quiz__input'>
                                                     <div>Description: </div>
-                                                    <input type="text" />
+                                                    <input type="text" onChange={e => setValues({...values, description: e.target.value})} />
                                                 </div>
                                                 <div className='new__quiz__input'>
                                                     <div>Date: </div>
-                                                    <input type="date" />
+                                                    <input type="date" onChange={e => setValues({...values, date: e.target.value})} />
                                                 </div>
                                                 <div className='new__quiz__input'>
                                                     <div>Time: </div>
-                                                    <input type="time" />
+                                                    <input type="time" onChange={e => setValues({...values, time: e.target.value})} />
                                                 </div>
                                                 <div className='new__quiz__input'>
                                                     <div>Duration: </div>
-                                                    <input type="text" />
+                                                    <input type="time" onChange={e => setValues({...values, duration: e.target.value})} />
+                                                </div>
+                                                <div className='new__quiz__input select'>
+                                                    <div>Group: </div>
+                                                    <select style={{marginLeft: '10px'}} onChange={e => setValues({...values, group_id: e.target.value})}>
+                                                        <option>All groups</option>
+                                                        {
+                                                            groups && groups.map(group => (
+                                                                <option key={group.id}>{group.name}</option>
+                                                            ))
+                                                        }
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div className="new__quiz__submit">
                                                     <i class='bx bxs-edit' ></i>
-                                                    <input type="submit" value={"Submit"}/>
+                                                    <button className='btnn' value={"Submit"} onClick={createNewQuiz}>Submit</button>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                                 </div>

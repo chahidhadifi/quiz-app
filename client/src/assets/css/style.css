@@ -841,11 +841,18 @@
 .page__not__found img {
   width: 40%;
 }
+@media (max-width: 768px) {
+  .page__not__found img {
+    width: 80%;
+  }
+}
 .page__not__found p {
   color: #FFFFFF;
   font-weight: 700;
   font-size: 20px;
   margin-top: 40px;
+  padding: 0 20px;
+  text-align: center;
 }
 .page__not__found__btn {
   padding: 10px 25px;
