@@ -901,12 +901,11 @@
   font-size: 20px;
   padding-left: 20px;
 }
-.new__quiz__submit i.bx-check {
+.new__quiz__submit i.bxs-edit, .new__quiz__submit i.bxs-trash {
   color: #FFFFFF;
   padding-left: 10px;
   padding-top: 10px;
   cursor: pointer;
-  font-weight: 900;
 }
 .new__quiz__submit input[type=submit] {
   padding: 10px 0px;
@@ -946,6 +945,81 @@
 }
 .new__quiz__input input:focus {
   outline: none;
+}
+
+.members__content .link {
+  text-decoration: none;
+}
+@media (min-width: 1200px) {
+  .members__content {
+    margin-left: 4%;
+    width: 100px;
+  }
+  .members__content__container {
+    width: 1000px;
+    margin-top: 10px !important;
+  }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+  .members__content__links {
+    padding-left: 28px;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .members__content__links {
+    padding-left: 28px;
+  }
+}
+@media (max-width: 768px) {
+  .members__content__links {
+    padding-left: 28px;
+    flex-direction: column !important;
+  }
+  .members__content__btn {
+    margin-bottom: 10px;
+  }
+}
+.members__content__links {
+  display: flex;
+  flex-direction: row;
+}
+.members__content__btn {
+  width: 160px !important;
+  margin-right: 10px;
+}
+
+.member__info input[type=button] {
+  padding: 10px 0px;
+  padding-left: 40px;
+  padding-right: 25px;
+  font-family: "Poppins";
+  font-weight: 700;
+  background-color: #0D1321;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+  color: #FFFFFF;
+}
+.member__info select {
+  border: none;
+  font-family: "Poppins";
+}
+.member__info select:focus {
+  outline: none;
+}
+.member__info__input div {
+  width: 160px;
+  margin-right: 10px;
+}
+.member__info__submit {
+  display: flex;
+}
+.member__info__submit div:nth-child(2) {
+  margin-left: 5px;
+}
+.member__info__submit div:nth-child(2) input {
+  background-color: crimson;
 }
 
 html {

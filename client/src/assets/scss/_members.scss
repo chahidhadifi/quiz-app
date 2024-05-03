@@ -1,0 +1,51 @@
+.members {
+    &__content {
+
+        .link {
+            text-decoration: none;
+        }
+
+        @include breakpoints(large) {
+            margin-left: 4%;
+            width: 100px;
+
+            &__container {
+                width: 1000px;
+                margin-top: 10px !important;
+            }
+        }
+
+        @include breakpoints(medium) {
+            &__links {
+                padding-left: 28px;
+            }
+        }
+
+        @include breakpoints(small) {
+            &__links {
+                padding-left: 28px;
+            }
+        }
+
+        @include breakpoints(mobile) {
+            &__links {
+                padding-left: 28px;
+                flex-direction: column !important;
+            }
+
+            &__btn {
+                margin-bottom: 10px;
+            }
+        }
+
+        &__links {
+            display: flex;
+            flex-direction: row;
+        }
+
+        &__btn {
+            width: 160px !important;
+            margin-right: 10px;
+        }
+    }
+}

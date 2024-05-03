@@ -1,0 +1,43 @@
+.member__info {
+    input[type="button"] {
+        padding: 10px 0px;
+        padding-left: 40px;
+        padding-right: 25px;
+        font-family: "Poppins";
+        font-weight: 700;
+        background-color: $chineseBlack;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        transition: all 300ms ease-in-out;
+        color: $white;
+    }
+
+    select {
+        border: none;
+        font-family: 'Poppins';
+    }
+
+    select:focus {
+        outline: none;
+    }
+
+    &__input {
+        div {
+            width: 160px;
+            margin-right: 10px;
+        }
+    }
+
+    &__submit {
+        display: flex;
+
+        div:nth-child(2) {
+            margin-left: 5px;
+
+            input {
+                background-color: crimson;
+            }
+        }
+    }
+}

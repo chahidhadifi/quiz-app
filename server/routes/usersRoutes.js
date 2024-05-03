@@ -7,6 +7,7 @@ router.get("/", usersController.getAllusers);
 router.get('/usersbygroup', usersController.getAllusersByGroup);
 router.get("/token", usersController.getUniqueUserByToken);
 router.get("/logout", usersController.logOut);
+router.get('/get-user-info/:id', usersController.getUniqueUser);
 
 router.post('/signup', usersController.signUp);
 router.post('/login', usersController.logIn);

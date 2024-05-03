@@ -1,13 +1,9 @@
-import react from 'react'
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { Link, useNavigate, Navigate } from 'react-router-dom'
 
-import BlackLogo from '../assets/images/black-logo.png'
 import UserImg from '../assets/images/user-img.png'
 import QuizImg from '../assets/images/quiz-img.png'
-import Logout from '../assets/images/logout.png'
-import Notifications from '../assets/images/notification.png'
 
 import SideNavbar from '../components/SideNavbar'
 import Navbar from '../components/Navbar'

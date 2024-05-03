@@ -114,7 +114,7 @@ const NewQuiz = () => {
                                                 </div>
                                             </div>
                                             <div className="new__quiz__submit">
-                                                    <i class='bx bx-check' ></i>
+                                                    <i class='bx bxs-edit' ></i>
                                                     <input type="submit" value={"Submit"}/>
                                             </div>
                                         </form>

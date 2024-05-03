@@ -28,18 +28,20 @@ const getAllusersByGroup = async (req, res) => {
   }
 };
 
-const getUniqueUser = async(req,res)=>{
+const getUniqueUser = async (req,res) => {
     const { id } = req.params;
-    const uniqueUser = await pool.query("select * from users where id=$1", [id]);
-    res.json(uniqueUser.rows[0]);
+    if (id != null) {
+      const uniqueUser = await pool.query("select * from users where id=$1", [id]);
+      res.json(uniqueUser.rows[0]);
+    }
 };
 
 const updateUser = async (req,res) => {
     const { id } = req.params;
     const { first_name, last_name, email, password, role, group_id} = req.body;
-    const updatedUser = await pool.query("update users set first_name=$1, last_name=$2, email=$3, password=$4, role=$5, group_id=$6 where id=6$ returning *",[first_name, last_name, email, password, role, group_id, id]);
+    const updatedUser = await pool.query("update users set first_name=$1, last_name=$2, email=$3, role=$4, group_id=$5 where id=$6",[first_name, last_name, email, role, group_id, id]);
     res.json(updatedUser.rows[0]);
-};
+}; 
 
 const deleteUser = async (req,res) => {
       const { id } = req.params;

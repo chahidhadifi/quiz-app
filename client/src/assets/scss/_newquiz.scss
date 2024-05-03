@@ -31,12 +31,13 @@
             font-size: 20px;
             padding-left: 20px;
 
-            &.bx-check {
+            &.bxs-edit,
+            &.bxs-trash {
                 color: $white;
                 padding-left: 10px;
                 padding-top: 10px;
                 cursor: pointer;
-                font-weight: $black;
+                // font-weight: $black;
             }
         }
         
