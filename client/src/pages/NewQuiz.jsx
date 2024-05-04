@@ -54,7 +54,7 @@ const NewQuiz = () => {
         const [hours, minutes] = time.split(':').map(Number);
         const totalMinutes = hours * 60 + minutes;
         return totalMinutes;
-    }
+    }    
 
     const getGroupIdByName = (groupName) => {
         if (groupName == '-') {
@@ -66,21 +66,19 @@ const NewQuiz = () => {
     };
 
     const createNewQuiz = () => {
-        const totalMinutes = timeToMinutes(values.time);
+        const totalMinutes = timeToMinutes(values.duration);
         let groupId = null;
         if (values.group_id == null || values.group_id == 'All groups') {
             groupId = null;
         } else {
             groupId = getGroupIdByName(values.group_id);
         }
-        // Update values locally first
         const updatedValues = {
             ...values,
             duration: totalMinutes.toString(),
             group_id: groupId
         };
         setValues(updatedValues);
-        // Then, make the POST request with the updated values
         axios.post('http://localhost:5000/api/v1/quiz', updatedValues)
             .then(res => {
                 if (res.statusText === 'OK') {
@@ -96,6 +94,7 @@ const NewQuiz = () => {
     useEffect(() => {
         getUserData();
         getAllGroups();
+        console.log(timeToMinutes('01:30'));
     }, []);
 
     return (

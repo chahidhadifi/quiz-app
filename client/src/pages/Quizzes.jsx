@@ -28,10 +28,11 @@ const Dashboard = () => {
     const [currentDateTime, setCurrentDateTime] = useState(null);
     const [completedQuizzes, setCompletedQuizzes] = useState(null);
 
+    const [quizzes, setQuizzes] = useState(null);
+
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
 
-    // ! ---------------- Member page ---------------------
     const getUserData = () => {
         axios.get('http://localhost:5000/api/v1/users/token')
         .then(res => {
@@ -51,13 +52,11 @@ const Dashboard = () => {
             console.log(err.message);
         });
     }
-    // ! --------------------------------
 
-    // ! ---------------- Admin page ---------------------
     const getAllQuizzesForAdmin = () => {
         axios.get('http://localhost:5000/api/v1/quiz/')
         .then(res => {
-          setQuizzesForAdmin(res.data);
+          setQuizzes(res.data);
         })
         .catch(err => {
           console.log(err);
@@ -99,9 +98,7 @@ const Dashboard = () => {
             console.log(err);
         })
     }
-    // ! --------------------------------
 
-    // ! ---------------- Globals ---------------------
     const getCurrentDateTime = async () => {
         await axios.get('https://script.googleusercontent.com/macros/echo?user_content_key=hp9tRyiF3u0VdLZmUJsj42UPUdVub69fCJyZomvnzFP530-QlxW9QwjAPtF3J3uZ3ZyDelbM8Kj1ME-nqs-jWFGNbccenPQJm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnJ9GRkcRevgjTvo8Dc32iw_BLJPcPfRdVKhJT5HNzQuXEeN3QFwl2n0M6ZmO-h7C6bwVq0tbM60-xIkq8d3Ts1lroRDJVNdycqbkuKKW-JKy&lib=MwxUjRcLr2qLlnVOLh12wSNkqcO1Ikdrk', {withCredentials: false})
         .then(res => {
@@ -146,14 +143,10 @@ const Dashboard = () => {
         })
     }
 
-    // ! --------------------------------
-
     useEffect(() => {
-        //* globals
         getUserData();
         getAllGroups();
 
-        //* admin
         getAllQuizzesForAdmin();
         getCurrentDateTime();
         getCompletedQuizzes();
@@ -189,91 +182,65 @@ const Dashboard = () => {
                                     </Link>
                                 </div>
                                 <div class="quizzes__content__item">
-                                    <div class="quizzes__upcoming__quizzes">
-                                        <div class="quizzes__upcoming__quizzes__title">
-                                            <h2>Data Structures</h2>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__datetime">
-                                            <div>
-                                                <i class='bx bxs-calendar' ></i>
-                                                <p>12 / 03 / 2024</p>
+                                    {
+                                        quizzes && quizzes.map(quiz => (
+                                            <div class="quizzes__upcoming__quizzes" key={ quiz.id }>
+                                                <div class="quizzes__upcoming__quizzes__title">
+                                                    <h2>{ quiz.title }</h2>
+                                                </div>
+                                                <div class="quizzes__upcoming__quizzes__datetime">
+                                                    <div>
+                                                        <i class='bx bxs-calendar' ></i>
+                                                        <p>{ quiz.date }</p>
+                                                    </div>
+                                                    <div>
+                                                        <i class='bx bxs-time-five' ></i>
+                                                        <p>{ quiz.time }</p>
+                                                    </div>
+                                                </div>
+                                                <div class="quizzes__upcoming__quizzes__option__v1">
+                                                    <p>Duration</p>
+                                                    <p>{ quiz.duration } minutes</p>
+                                                </div>
+                                                {/* <div class="quizzes__upcoming__quizzes__option__v1">
+                                                    <p>Number of questions</p>
+                                                    <p>15</p>
+                                                </div>
+                                                <div class="quizzes__upcoming__quizzes__option__v1">
+                                                    <p>Score per question</p>
+                                                    <p>1</p>
+                                                </div> */}
+                                                <div class="quizzes__upcoming__quizzes__option__v1">
+                                                    <p>Group</p>
+                                                    <p style={{textTransform: 'capitalize'}}>
+                                                        {
+                                                            (quiz.group_id == null) ?
+                                                            'All groups'
+                                                            :
+                                                            groups.map(group =>(
+                                                                (group.id == quiz.group_id) ?
+                                                                group.name
+                                                                :
+                                                                null
+                                                            ))
+                                                        }
+                                                    </p>
+                                                </div>
+                                                <div class="quizzes__upcoming__quizzes__option__v2">
+                                                    <p>Description</p>
+                                                    <p>
+                                                        { quiz.description }
+                                                    </p>
+                                                </div>
+                                                <div class="quizzes__upcoming__quizzes__button">
+                                                    <button>
+                                                        <i class='bx bxs-pencil' ></i>
+                                                        <p>Edit</p>
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <i class='bx bxs-time-five' ></i>
-                                                <p>09 : 00</p>
-                                            </div>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__option__v1">
-                                            <p>Duration</p>
-                                            <p>30 minutes</p>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__option__v1">
-                                            <p>Number of questions</p>
-                                            <p>15</p>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__option__v1">
-                                            <p>Score per question</p>
-                                            <p>1</p>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__option__v2">
-                                            <p>Description</p>
-                                            <p>
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur
-                                                rerum excepturi quam. Explicabo, voluptatum iusto maxime 
-                                                velit porro, dolore libero perferendis ab ipsam exercitationem
-                                                maiores, harum mollitia. A, voluptas ipsa.
-                                            </p>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__button">
-                                            <button>
-                                                <i class='bx bxs-pencil' ></i>
-                                                <p>Edit</p>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="quizzes__upcoming__quizzes">
-                                        <div class="quizzes__upcoming__quizzes__title">
-                                            <h2>Data Structures</h2>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__datetime">
-                                            <div>
-                                                <i class='bx bxs-calendar' ></i>
-                                                <p>12 / 03 / 2024</p>
-                                            </div>
-                                            <div>
-                                                <i class='bx bxs-time-five' ></i>
-                                                <p>09 : 00</p>
-                                            </div>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__option__v1">
-                                            <p>Duration</p>
-                                            <p>30 minutes</p>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__option__v1">
-                                            <p>Number of questions</p>
-                                            <p>15</p>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__option__v1">
-                                            <p>Score per question</p>
-                                            <p>1</p>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__option__v2">
-                                            <p>Description</p>
-                                            <p>
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur
-                                                rerum excepturi quam. Explicabo, voluptatum iusto maxime 
-                                                velit porro, dolore libero perferendis ab ipsam exercitationem
-                                                maiores, harum mollitia. A, voluptas ipsa.
-                                            </p>
-                                        </div>
-                                        <div class="quizzes__upcoming__quizzes__button">
-                                            <button>
-                                                <i class='bx bxs-pencil' ></i>
-                                                <p>Edit</p>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    
+                                        ))
+                                    }
                                 </div>
                                 </div>
                             </div>
