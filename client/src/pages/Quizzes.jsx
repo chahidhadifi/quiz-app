@@ -143,6 +143,13 @@ const Dashboard = () => {
         })
     }
 
+    const [quizId, setQuizId] = useState(null);
+
+    const getQuizId = (event) => {
+        const id = event.target.closest('.quizzes__upcoming__quizzes').querySelector('.key').innerText;
+        setQuizId(id);
+    }
+
     useEffect(() => {
         getUserData();
         getAllGroups();
@@ -188,6 +195,12 @@ const Dashboard = () => {
                                                 <div class="quizzes__upcoming__quizzes__title">
                                                     <h2>{ quiz.title }</h2>
                                                 </div>
+                                                <div class="quizzes__upcoming__quizzes__datetime" style={{marginBottom: '2px', display: 'none'}}>
+                                                    <div>
+                                                        <i class='bx bxs-key'></i>
+                                                        <p className='key'>{ quiz.id }</p>
+                                                    </div>
+                                                </div>
                                                 <div class="quizzes__upcoming__quizzes__datetime">
                                                     <div>
                                                         <i class='bx bxs-calendar' ></i>
@@ -217,7 +230,7 @@ const Dashboard = () => {
                                                             (quiz.group_id == null) ?
                                                             'All groups'
                                                             :
-                                                            groups.map(group =>(
+                                                            groups && groups.map(group =>(
                                                                 (group.id == quiz.group_id) ?
                                                                 group.name
                                                                 :
@@ -232,10 +245,10 @@ const Dashboard = () => {
                                                         { quiz.description }
                                                     </p>
                                                 </div>
-                                                <div class="quizzes__upcoming__quizzes__button">
+                                                <div class="quizzes__upcoming__quizzes__button" style={{marginTop: '15px'}}>
                                                     <button>
                                                         <i class='bx bxs-pencil' ></i>
-                                                        <p>Edit</p>
+                                                        <Link style={{color: 'white'}} to={'/quizzes/edit-quiz/'+quizId} className='link' onMouseEnter={getQuizId} onTouchStart={getQuizId}><p>Edit</p></Link>
                                                     </button>
                                                 </div>
                                             </div>

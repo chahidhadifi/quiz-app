@@ -52,7 +52,7 @@ const updateQuiz = async (req, res) => {
     try {
         const { id } = req.params;
         const { title, description, date, time, duration, group_id } = req.body;
-        const updatedQuiz = await pool.query("update quiz set title=$1, description=$2, date=$3, time=$4, duration=$5, group_id=$6 where id=$7 returning *", [title, description, date, time, duration, group_id, id]);
+        const updatedQuiz = await pool.query("update quiz set title=$1, description=$2, date=$3, time=$4, duration=$5, group_id=$6 where id=$7", [title, description, date, time, duration, group_id, id]);
         res.json(updatedQuiz.rows[0]);
     } catch (err) {
         console.log(err.message);
@@ -62,7 +62,7 @@ const updateQuiz = async (req, res) => {
 const deleteQuiz = async (req, res) => {
     try {
         const { id } = req.params;
-        const deletedQuiz = await pool.query("delete from quiz where id=$1 returning *", [id]);
+        const deletedQuiz = await pool.query("delete from quiz where id=$1", [id]);
         res.json({"message": "item deleted successfully"})
     } catch (err) {
         console.log(err.message);

@@ -6,7 +6,7 @@ const quizController = require("../controllers/quizController");
 router.get("/", quizController.getAllQuizzes);
 router.get("/all/:group_id", quizController.getAllQuizzesByGroupId);
 router.get('/completed-quiz', quizController.getCompletedQuizzes);
-// router.get("/one/:id", quizController.getQuizById);
+router.get('/get-quiz-info/:id', quizController.getQuizById);
 
 router.post("/", quizController.createQuiz);
 

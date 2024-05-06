@@ -57,7 +57,7 @@ const NewQuiz = () => {
     }    
 
     const getGroupIdByName = (groupName) => {
-        if (groupName == '-') {
+        if (groupName == 'All groups') {
             return null;
         } else {
             const foundGroup = groups.find(group => group.name == groupName);
@@ -94,7 +94,6 @@ const NewQuiz = () => {
     useEffect(() => {
         getUserData();
         getAllGroups();
-        console.log(timeToMinutes('01:30'));
     }, []);
 
     return (

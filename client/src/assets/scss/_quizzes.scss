@@ -118,7 +118,7 @@
                     padding: 4px 15px;
                     border-radius: 10px;
                     margin-right: 4px;
-                    transition: all 200ms ease-in-out;
+                    cursor: pointer;
 
                     i {
                         padding: 0;
@@ -129,11 +129,6 @@
                         margin: 0;
                         padding: 0;
                         padding-left: 3px;
-                    }
-
-                    &:hover {
-                        cursor: pointer;
-                        opacity: 0.82;
                     }
                 }
             }

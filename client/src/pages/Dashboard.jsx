@@ -31,31 +31,8 @@ const Dashboard = () => {
     const [currentDateTime, setCurrentDateTime] = useState(null);
     const [completedQuizzes, setCompletedQuizzes] = useState(null);
 
-    // const menuIcon = useRef(null);
-    // const closeIcon = useRef(null);
-    // const menu = useRef(null);
-    // const [menuIsOpened, setMenuIsOpened] = useState(false);
-
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
-
-    // const handleMenuIcon = () => {
-    //     if (!menuIsOpened) {
-    //         menu.current.classList.remove("fade-out");
-    //         menu.current.classList.add("fade-in");
-    //         menu.current.setAttribute("style", "display: block !important;");
-    //         setMenuIsOpened(true);
-    //     }
-    // };
-
-    // const handleCloseIcon = () => {
-    //     if (menuIsOpened) {
-    //         menu.current.classList.remove("fade-in");
-    //         menu.current.classList.add("fade-out");
-    //         menu.current.setAttribute("style", "display: none !important;");
-    //         setMenuIsOpened(false);
-    //     }
-    // };
 
     // ! ---------------- Member page ---------------------
     const getUserData = () => {
@@ -113,18 +90,34 @@ const Dashboard = () => {
 
     const changeGroupForAdmin = (event) => {
         const groupName = event.target.innerHTML;
-        axios.get('http://localhost:5000/api/v1/users/usersbygroup', {
+        // axios.get('http://localhost:5000/api/v1/users/usersbygroup', {
+        //     params: {
+        //       groupName: groupName
+        //     }
+        //   })
+        // .then(res => {
+        //     setUsersForAdmin(res.data);
+        //     console.log(res.data);
+        // })
+        // .catch(err => {
+        //     console.log(err);
+        // })
+        if (groupName == 'All') {
+            getAllUsers();
+        } else {
+            axios.get('http://localhost:5000/api/v1/users/usersbygroup', {
             params: {
               groupName: groupName
-            }
-          })
-        .then(res => {
-            setUsersForAdmin(res.data);
-            console.log(res.data);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+                }
+            })
+            .then(res => {
+                setUsersForAdmin(res.data);
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
     }
     // ! --------------------------------
 
@@ -287,6 +280,7 @@ const Dashboard = () => {
                                                 </div>
                                             </div>
                                             <div className="dashboard__members_list__groups">
+                                                <button onClick={changeGroupForAdmin}>All</button>
                                                 {
                                                     groups && groups.map(group => (
                                                         <button key={group.id} style={{textTransform: 'capitalize'}} onClick={changeGroupForAdmin}>{ group.name }</button>
