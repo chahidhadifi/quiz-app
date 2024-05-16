@@ -39,7 +39,7 @@ const Signup = () => {
                         <img src={LogoWhite} alt="Logo" className="login__writeup__logo"/>
                         <h2>Get started by signing up for a new account</h2>
                         <form onSubmit={handleSubmit}>
-                            <div className="flex flex-ai-c flex-jc-sb">
+                            <div className="flex flex-jc-sb">
                                 <div className="fl-container">
                                     <label htmlFor="firstname">
                                         Your first name

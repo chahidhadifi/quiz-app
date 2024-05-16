@@ -114,7 +114,7 @@ const Members = () => {
                         <div className="dashboard">
                             <Navbar firstName={firstName} lastName={lastName} role={role} ></Navbar>
                             <div className="dashboard__main">
-                                <SideNavbar></SideNavbar>
+                                <SideNavbar role={role}></SideNavbar>
                                 <div className="dashboard__content members__content flex-fd-c">
                                     <div className='members__content__links'>
                                         <Link to='/create-group' style={{textDecoration: 'none'}}>
@@ -131,7 +131,7 @@ const Members = () => {
                                         </Link>
                                     </div>
                                     <div className="dashboard__content__item members__content__container">
-                                        <div className="dashboard__members_list scrollbar" style={{ overflowY: 'scroll' }} id="style-3">
+                                        <div className="dashboard__members_list scrollbar" style={{ overflowY: 'scroll', width: '700px' }} id="style-3">
                                             <div className="dashboard__members_list__title">
                                                 <h3>Members list</h3>
                                             </div>
@@ -166,7 +166,9 @@ const Members = () => {
                     </div>
                     :
                     (role=='member') ?
-                    <div>This is member</div>
+                    <div>
+                        <Navigate to='/page-not-found' replace={true} />
+                    </div>
                     :
                     <div>This is tutor</div>
                 }

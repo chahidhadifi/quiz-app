@@ -8,6 +8,8 @@ import SideBarResults from '../assets/images/side-bar-results.png'
 
 export default class SideNavbar extends Component {
   render() {
+    const { role } = this.props;
+    
     return (
       <div>
         <div className="dashboard__sidebar">
@@ -24,18 +26,19 @@ export default class SideNavbar extends Component {
                                   <h3>Quizzes</h3>
                               </div>
                             </Link>
-                            <Link to='/members' className='link'>
-                              <div className="dashboard__sidebar__options__item">
-                                  <img src={SideBarMembers} alt=""/>
-                                  <h3>Members</h3>
+                            {
+                              (role == 'admin') ?
+                              <div>
+                                <Link to='/members' className='link'>
+                                  <div className="dashboard__sidebar__options__item">
+                                      <img src={SideBarMembers} alt=""/>
+                                      <h3>Members</h3>
+                                  </div>
+                                </Link>
                               </div>
-                            </Link>
-                            <Link to='/results' className='link'>
-                              <div className="dashboard__sidebar__options__item">
-                                  <img src={SideBarResults} alt=""/>
-                                  <h3>Results</h3>
-                              </div>
-                            </Link>
+                              :
+                              null
+                            }
                         </div>
                     </div>
       </div>

@@ -284,7 +284,7 @@
   color: white;
   font-family: "Poppins";
   font-size: 12px;
-  width: 73.5%;
+  width: 100%;
 }
 .login__writeup form .fl-container {
   margin-bottom: 9px;
@@ -298,21 +298,22 @@
     margin-bottom: 7px;
   }
   .login__writeup .fl-container {
-    width: 100%;
+    width: 73%;
   }
 }
 @media (min-width: 768px) and (max-width: 992px) {
   .login .fl-container {
-    width: 47%;
+    width: 100%;
+    margin-right: 12%;
   }
   .login .fl-container input {
-    width: 100%;
+    width: 80%;
   }
 }
 @media (min-width: 992px) and (max-width: 1200px) {
   .login .fl-container {
-    width: 37%;
-    margin-right: 10%;
+    width: 87%;
+    margin-right: 20%;
   }
   .login .fl-container input {
     width: 100%;
@@ -320,8 +321,7 @@
 }
 @media (min-width: 1200px) {
   .login .fl-container {
-    width: 47%;
-    margin-right: -12.5%;
+    width: 48%;
   }
   .login .fl-container input {
     width: 100%;
@@ -735,11 +735,14 @@
 }
 .dashboard .quizzes__upcoming__quizzes__option__v2 p:nth-child(2) {
   width: 310px;
+  height: 100px;
   padding-top: 6px;
   padding-bottom: 6px;
   padding-left: 15px;
   padding-right: 15px;
   font-size: 12px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 .dashboard .quizzes__upcoming__quizzes__button button {
   background-color: #0D1321;

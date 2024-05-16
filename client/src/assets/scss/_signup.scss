@@ -9,7 +9,8 @@
                 color: white;
                 font-family: "Poppins";
                 font-size: $sm;
-                width: 73.5%;
+                // width: 73.5%;
+                width: 100%;
             }
 
             .fl-container {
@@ -32,24 +33,26 @@
             }
             
             .fl-container {
-                width: 100%;
+                width: 73%;
             }
         }
     }
 
     @include breakpoints(small) {
         .fl-container {
-            width: 47%;
+            width: 100%;
+            margin-right: 12%;
+            
             input {
-                width: 100%;
+                width: 80%;
             }
         }
     }
 
     @include breakpoints(medium) {
         .fl-container {
-            width: 37%;
-            margin-right: 10%;
+            width: 87%;
+            margin-right: 20%;
             
             input {
                 width: 100%;
@@ -59,8 +62,7 @@
 
     @include breakpoints(large) {
         .fl-container {
-            width: 47%;
-            margin-right: -12.5%;
+            width: 48%;
 
             input {
                 width: 100%;

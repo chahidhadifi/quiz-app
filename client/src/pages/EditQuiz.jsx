@@ -132,13 +132,19 @@ const EditQuiz = () => {
                         <div className="dashboard">
                             <Navbar firstName={firstName || ''} lastName={lastName || ''} role={role || ''}></Navbar>
                             <div className="dashboard__main">
-                                <SideNavbar></SideNavbar>
+                                <SideNavbar role={role}></SideNavbar>
                                 <div className="dashboard__content" style={{display: "flex", flexDirection: "column"}}>
                                 <div>
                                     <Link to='/quizzes' style={{textDecoration: 'none'}}>
                                         <button class="btn new-quiz" style={{width: '100px'}}>
                                             <i class='bx bx-arrow-back'></i>
                                             <h4>Back</h4>
+                                        </button>
+                                    </Link>
+                                    <Link to={'/quizzes/add-questions/'+id} style={{textDecoration: 'none'}}>
+                                        <button class="btn new-quiz" style={{width: '160px'}}>
+                                            <i class='bx bx-list-plus'></i>
+                                            <h4>Add questions</h4>
                                         </button>
                                     </Link>
                                 </div>

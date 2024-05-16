@@ -42,9 +42,11 @@ const Navbar = ({ firstName, lastName, role }) => {
     return (
         <>
             <div className="dashboard__navbar">
-                                <div>
-                                    <img src={BlackLogo} alt="Logo"/>
-                                </div>
+                                <Link to={'/'}>
+                                    <div>
+                                        <img src={BlackLogo} alt="Logo"/>
+                                    </div>
+                                </Link>
                                 <div>
                                     <div className="dashboard__navbar__icons">
                                         <i className='bx bx-menu menu-icon' ref={menuIcon} onClick={handleMenuIcon}></i>

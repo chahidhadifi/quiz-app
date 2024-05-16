@@ -12,7 +12,7 @@ const getAllQuizzesByGroupId = async (req, res) => {
 
 const getAllQuizzes = async (req, res) => {
     try {
-      const query = await pool.query("select * from quiz where TO_TIMESTAMP(date || ' ' || time, 'YYYY-MM-DD HH:MI') >= CURRENT_TIMESTAMP");
+      const query = await pool.query("select * from quiz where TO_TIMESTAMP(date || ' ' || time, 'YYYY-MM-DD HH24:MI') > CURRENT_TIMESTAMP-(duration::INTEGER * INTERVAL '1 minute')");
       res.json(query.rows);
     } catch (err) {
       console.log(err.message);
@@ -21,7 +21,7 @@ const getAllQuizzes = async (req, res) => {
 
 const getCompletedQuizzes = async (req, res) => {
     try {
-        const query = await pool.query("SELECT q.title, g.name, COUNT(u.group_id) AS user_count, q.date FROM quiz q JOIN \"groups\" g ON q.group_id = g.id LEFT JOIN users u ON u.group_id = g.id WHERE TO_TIMESTAMP(date, 'YYYY-MM-DD') <= CURRENT_TIMESTAMP GROUP BY q.title, g.name, q.date");
+        const query = await pool.query("SELECT q.title, g.name, COUNT(u.group_id) AS user_count, q.date FROM quiz q JOIN \"groups\" g ON q.group_id = g.id LEFT JOIN users u ON u.group_id = g.id WHERE TO_TIMESTAMP(date, 'YYYY-MM-DD') <= CURRENT_TIMESTAMP GROUP BY q.title, g.name, q.date order by q.date desc limit 3");
         res.json(query.rows);
     } catch (err) {
         console.log(err.message);

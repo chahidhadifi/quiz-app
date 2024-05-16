@@ -172,99 +172,187 @@ const Dashboard = () => {
             }
             </div>
             <div>
-                {
-                    (role=='admin') ?
-                    <div>
+            <div>
                         <div className="dashboard">
                             <Navbar firstName={firstName} lastName={lastName} role={role}></Navbar>
                             <div className="dashboard__main">
-                                <SideNavbar></SideNavbar>
-                                <div className="dashboard__content" style={{display: "flex", flexDirection: "column"}}>
-                                <div>
-                                    <Link to='/new-quiz' style={{textDecoration: 'none'}}>
-                                        <button class="btn new-quiz">
-                                            <i class='bx bxs-add-to-queue'></i>
-                                            <h4>New quiz</h4>
-                                        </button>
-                                    </Link>
-                                </div>
-                                <div class="quizzes__content__item">
-                                    {
-                                        quizzes && quizzes.map(quiz => (
-                                            <div class="quizzes__upcoming__quizzes" key={ quiz.id }>
-                                                <div class="quizzes__upcoming__quizzes__title">
-                                                    <h2>{ quiz.title }</h2>
-                                                </div>
-                                                <div class="quizzes__upcoming__quizzes__datetime" style={{marginBottom: '2px', display: 'none'}}>
-                                                    <div>
-                                                        <i class='bx bxs-key'></i>
-                                                        <p className='key'>{ quiz.id }</p>
+                                <SideNavbar role={role}></SideNavbar>
+                                {
+                                    (role=='admin' || role=='tutor') ?
+                                    <div className="dashboard__content" style={{display: "flex", flexDirection: "column"}}>
+                                        <div>
+                                            <Link to='/new-quiz' style={{textDecoration: 'none'}}>
+                                                <button class="btn new-quiz">
+                                                    <i class='bx bxs-add-to-queue'></i>
+                                                    <h4>New quiz</h4>
+                                                </button>
+                                            </Link>
+                                        </div>
+                                        <div class="quizzes__content__item">
+                                            {
+                                                quizzes && quizzes.map(quiz => (
+                                                    <div class="quizzes__upcoming__quizzes" key={ quiz.id }>
+                                                        <div class="quizzes__upcoming__quizzes__title">
+                                                            <h2>{ quiz.title }</h2>
+                                                        </div>
+                                                        <div class="quizzes__upcoming__quizzes__datetime" style={{marginBottom: '2px', display: 'none'}}>
+                                                            <div>
+                                                                <i class='bx bxs-key'></i>
+                                                                <p className='key'>{ quiz.id }</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="quizzes__upcoming__quizzes__datetime">
+                                                            <div>
+                                                                <i class='bx bxs-calendar' ></i>
+                                                                <p>{ quiz.date }</p>
+                                                            </div>
+                                                            <div>
+                                                                <i class='bx bxs-time-five' ></i>
+                                                                <p>{ quiz.time }</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="quizzes__upcoming__quizzes__option__v1">
+                                                            <p>Duration</p>
+                                                            <p>{ quiz.duration } minutes</p>
+                                                        </div>
+                                                        <div class="quizzes__upcoming__quizzes__option__v1">
+                                                            <p>Group</p>
+                                                            <p style={{textTransform: 'capitalize'}}>
+                                                                {
+                                                                    (quiz.group_id == null) ?
+                                                                    'All groups'
+                                                                    :
+                                                                    groups && groups.map(group =>(
+                                                                        (group.id == quiz.group_id) ?
+                                                                        group.name
+                                                                        :
+                                                                        null
+                                                                    ))
+                                                                }
+                                                            </p>
+                                                        </div>
+                                                        <div class="quizzes__upcoming__quizzes__option__v2">
+                                                            <p>Description</p>
+                                                            <p>
+                                                                { quiz.description }
+                                                            </p>
+                                                        </div>
+                                                        <div class="quizzes__upcoming__quizzes__button" style={{marginTop: '15px'}}>
+                                                            <button>
+                                                                <i class='bx bxs-pencil' ></i>
+                                                                <Link style={{color: 'white'}} to={'/quizzes/edit-quiz/'+quizId} className='link' onMouseEnter={getQuizId} onTouchStart={getQuizId}><p>Edit</p></Link>
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="quizzes__upcoming__quizzes__datetime">
-                                                    <div>
-                                                        <i class='bx bxs-calendar' ></i>
-                                                        <p>{ quiz.date }</p>
+                                                ))
+                                            }
+                                        </div>
+                                    </div>
+                                    :
+                                    <div className="dashboard__content" style={{display: "flex", flexDirection: "column"}}>
+                                        <div class="quizzes__content__item">
+                                            {
+                                                // quizzes && quizzes.map(quiz => (
+                                                //     (quiz.group_id == userGroupId) ?
+                                                //     <div class="quizzes__upcoming__quizzes" key={ quiz.id }>
+                                                //         <div class="quizzes__upcoming__quizzes__title">
+                                                //             <h2>{ quiz.title }</h2>
+                                                //         </div>
+                                                //         <div class="quizzes__upcoming__quizzes__datetime" style={{marginBottom: '2px', display: 'none'}}>
+                                                //             <div>
+                                                //                 <i class='bx bxs-key'></i>
+                                                //                 <p className='key'>{ quiz.id }</p>
+                                                //             </div>
+                                                //         </div>
+                                                //         <div class="quizzes__upcoming__quizzes__datetime">
+                                                //             <div>
+                                                //                 <i class='bx bxs-calendar' ></i>
+                                                //                 <p>{ quiz.date }</p>
+                                                //             </div>
+                                                //             <div>
+                                                //                 <i class='bx bxs-time-five' ></i>
+                                                //                 <p>{ quiz.time }</p>
+                                                //             </div>
+                                                //         </div>
+                                                //         <div class="quizzes__upcoming__quizzes__option__v1">
+                                                //             <p>Duration</p>
+                                                //             <p>{ quiz.duration } minutes</p>
+                                                //         </div>
+                                                //         <div class="quizzes__upcoming__quizzes__option__v2">
+                                                //             <p>Description</p>
+                                                //             <p>
+                                                //                 { quiz.description }
+                                                //             </p>
+                                                //         </div>
+                                                //         <div class="quizzes__upcoming__quizzes__button" style={{marginTop: '15px'}}>
+                                                //             <button>
+                                                //                 <i class='bx bxs-log-in-circle'></i>
+                                                //                 <Link style={{color: 'white'}} to={'/quizzes/edit-quiz/'+quizId} className='link' onMouseEnter={getQuizId} onTouchStart={getQuizId}><p>Open</p></Link>
+                                                //             </button>
+                                                //         </div>
+                                                //     </div>
+                                                //     :
+                                                    // <div className='flex flex-fd-r flex-ai-c'>
+                                                    //     <i class='bx bxs-error-circle' style={{color: '#ECA8A8', marginRight: '10px'}}></i>
+                                                    //     <h2>No quiz available at this time</h2>
+                                                    // </div>
+                                                    
+                                                // ))
+                                                (quizzes && quizzes.length==0) ?
+                                                    <div className='flex flex-fd-r flex-ai-c'>
+                                                        <i class='bx bxs-error-circle' style={{color: '#ECA8A8', marginRight: '10px'}}></i>
+                                                        <h2>No quiz available at this time</h2>
                                                     </div>
-                                                    <div>
-                                                        <i class='bx bxs-time-five' ></i>
-                                                        <p>{ quiz.time }</p>
-                                                    </div>
-                                                </div>
-                                                <div class="quizzes__upcoming__quizzes__option__v1">
-                                                    <p>Duration</p>
-                                                    <p>{ quiz.duration } minutes</p>
-                                                </div>
-                                                {/* <div class="quizzes__upcoming__quizzes__option__v1">
-                                                    <p>Number of questions</p>
-                                                    <p>15</p>
-                                                </div>
-                                                <div class="quizzes__upcoming__quizzes__option__v1">
-                                                    <p>Score per question</p>
-                                                    <p>1</p>
-                                                </div> */}
-                                                <div class="quizzes__upcoming__quizzes__option__v1">
-                                                    <p>Group</p>
-                                                    <p style={{textTransform: 'capitalize'}}>
-                                                        {
-                                                            (quiz.group_id == null) ?
-                                                            'All groups'
-                                                            :
-                                                            groups && groups.map(group =>(
-                                                                (group.id == quiz.group_id) ?
-                                                                group.name
-                                                                :
-                                                                null
-                                                            ))
-                                                        }
-                                                    </p>
-                                                </div>
-                                                <div class="quizzes__upcoming__quizzes__option__v2">
-                                                    <p>Description</p>
-                                                    <p>
-                                                        { quiz.description }
-                                                    </p>
-                                                </div>
-                                                <div class="quizzes__upcoming__quizzes__button" style={{marginTop: '15px'}}>
-                                                    <button>
-                                                        <i class='bx bxs-pencil' ></i>
-                                                        <Link style={{color: 'white'}} to={'/quizzes/edit-quiz/'+quizId} className='link' onMouseEnter={getQuizId} onTouchStart={getQuizId}><p>Edit</p></Link>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        ))
-                                    }
-                                </div>
-                                </div>
+                                                    :
+                                                    quizzes && quizzes.map(quiz => (
+                                                        (quiz.group_id == userGroupId) ?
+                                                            <div class="quizzes__upcoming__quizzes" key={ quiz.id }>
+                                                                <div class="quizzes__upcoming__quizzes__title">
+                                                                    <h2>{ quiz.title }</h2>
+                                                                </div>
+                                                                <div class="quizzes__upcoming__quizzes__datetime" style={{marginBottom: '2px', display: 'none'}}>
+                                                                    <div>
+                                                                        <i class='bx bxs-key'></i>
+                                                                        <p className='key'>{ quiz.id }</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="quizzes__upcoming__quizzes__datetime">
+                                                                    <div>
+                                                                        <i class='bx bxs-calendar' ></i>
+                                                                        <p>{ quiz.date }</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <i class='bx bxs-time-five' ></i>
+                                                                        <p>{ quiz.time }</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="quizzes__upcoming__quizzes__option__v1">
+                                                                    <p>Duration</p>
+                                                                    <p>{ quiz.duration } minutes</p>
+                                                                </div>
+                                                                <div class="quizzes__upcoming__quizzes__option__v2">
+                                                                    <p>Description</p>
+                                                                    <p>
+                                                                        { quiz.description }
+                                                                    </p>
+                                                                </div>
+                                                                <div class="quizzes__upcoming__quizzes__button" style={{marginTop: '15px'}}>
+                                                                    <button>
+                                                                        <i class='bx bxs-log-in-circle'></i>
+                                                                        <Link style={{color: 'white'}} to={'/quizzes/edit-quiz/'+quizId} className='link' onMouseEnter={getQuizId} onTouchStart={getQuizId}><p>Open</p></Link>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        :
+                                                        null
+                                                ))
+                                            }
+                                        </div>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
-                    :
-                    (role=='member') ?
-                    <div>This is member</div>
-                    :
-                    <div>This is tutor</div>
-                }
             </div>
         </div>
     )

@@ -120,7 +120,7 @@ const MemberInfo = () => {
                         <div className="dashboard">
                             <Navbar firstName={firstName || ''} lastName={lastName || ''} role={role || ''}></Navbar>
                             <div className="dashboard__main">
-                                <SideNavbar></SideNavbar>
+                                <SideNavbar role={role}></SideNavbar>
                                 <div className="dashboard__content" style={{display: "flex", flexDirection: "column"}}>
                                 <div>
                                     <Link to='/members' style={{textDecoration: 'none'}}>

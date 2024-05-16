@@ -98,11 +98,14 @@
 
                 p:nth-child(2) {
                     width: 310px;
+                    height: 100px;
                     padding-top: 6px;
                     padding-bottom: 6px;
                     padding-left: 15px;
                     padding-right: 15px;
                     font-size: $sm;
+                    overflow-wrap: break-word;
+                    word-wrap: break-word;
                 }
             }
 
