@@ -3,7 +3,7 @@ const pool = require("../db");
 const getAllQuizzesByGroupId = async (req, res) => {
   try {
     const group_id = req.params.group_id;
-    const query = await pool.query("select * from quiz where group_id=$1", [group_id]);
+    const query = await pool.query("select * from quiz where group_id=$1 order by date desc limit 2", [group_id]);
     res.json(query.rows);
   } catch (err) {
     console.log(err.message);
