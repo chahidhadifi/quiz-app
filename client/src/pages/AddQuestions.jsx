@@ -42,8 +42,6 @@ const AddQuestions = () => {
             setFirstName(res.data.first_name);
             setLastName(res.data.last_name);
             setRole(res.data.role);
-          } else if (res.data.error) {
-            setAuth(false);
           }
         })
         .catch(err => {
@@ -110,13 +108,30 @@ const AddQuestions = () => {
     }
 
     const addNewQuestion = () => {
-        console.log(questionCreatedInfo);
+        axios.post('http://localhost:5000/api/v1/questions/add-new-question/'+id , questionCreatedInfo)
+        .then(res => {
+            if (res.statusText == "OK") {
+                setQuestionCreatedInfo({
+                    title: '',
+                    option_a: '',
+                    option_b: '',
+                    option_c: '',
+                    option_d: '',
+                    answer: '',
+                    quiz_id: id
+                })
+            }
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
 
     useEffect(() => {
         getQuizInfoById();
         getUserData();
-    }, []);
+    }, [questions]);
 
     return (
         <div>
@@ -142,27 +157,27 @@ const AddQuestions = () => {
                                             <div className='new__quiz__inputs'>
                                                 <div className='new__quiz__input member__info__input'>
                                                     <div>Title:</div>
-                                                    <input type="text" onChange={e => setQuestionCreatedInfo({...questionCreatedInfo , title: e.target.value})} />
+                                                    <input type="text" value={questionCreatedInfo.title} onChange={e => setQuestionCreatedInfo({...questionCreatedInfo , title: e.target.value})} />
                                                 </div>
                                                 <div className='new__quiz__input member__info__input'>
                                                     <div>Option 1:</div>
-                                                    <input type="text"  onChange={e => setQuestionCreatedInfo({...questionCreatedInfo, option_a: e.target.value})} />
+                                                    <input type="text" value={questionCreatedInfo.option_a}  onChange={e => setQuestionCreatedInfo({...questionCreatedInfo, option_a: e.target.value})} />
                                                 </div>
                                                 <div className='new__quiz__input member__info__input'>
                                                     <div>Option 2:</div>
-                                                    <input type="text" onChange={e => setQuestionCreatedInfo({...questionCreatedInfo, option_b: e.target.value})} />
+                                                    <input type="text" value={questionCreatedInfo.option_b} onChange={e => setQuestionCreatedInfo({...questionCreatedInfo, option_b: e.target.value})} />
                                                 </div>
                                                 <div className='new__quiz__input member__info__input'>
                                                     <div>Option 3:</div>
-                                                    <input type="text" onChange={e => setQuestionCreatedInfo({...questionCreatedInfo, option_c: e.target.value})} />
+                                                    <input type="text" value={questionCreatedInfo.option_c} onChange={e => setQuestionCreatedInfo({...questionCreatedInfo, option_c: e.target.value})} />
                                                 </div>
                                                 <div className='new__quiz__input member__info__input'>
                                                     <div>Option 4:</div>
-                                                    <input type="text" onChange={e => setQuestionCreatedInfo({...questionCreatedInfo, option_d: e.target.value})} />
+                                                    <input type="text" value={questionCreatedInfo.option_d} onChange={e => setQuestionCreatedInfo({...questionCreatedInfo, option_d: e.target.value})} />
                                                 </div>
                                                 <div className='new__quiz__input member__info__input'>
                                                     <div>Answer:</div>
-                                                    <select onChange={e => setQuestionCreatedInfo({...questionCreatedInfo, answer: e.target.value})}>
+                                                    <select value={questionCreatedInfo.answer} onChange={e => setQuestionCreatedInfo({...questionCreatedInfo, answer: e.target.value})}>
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
                                                         <option value="3">3</option>
