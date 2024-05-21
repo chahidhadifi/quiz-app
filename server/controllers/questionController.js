@@ -9,11 +9,11 @@ const getAllQuestions = async (req, res) => {
   }
 };
 
-const getQuestionById = async (req, res) => {
+const getQuestionByQuizId = async (req, res) => {
     try {
         const { id } = req.params;
-        const questionById = await pool.query("select * from question where id=$1", [id]);
-        res.json(questionById.rows[0]);
+        const questionById = await pool.query("select * from question where quiz_id=$1", [id]);
+        res.json(questionById.rows);
     } catch (err) {
         console.log(err.message);
     }
@@ -22,7 +22,7 @@ const getQuestionById = async (req, res) => {
 const createQuestion = async (req, res) => {
     try {
         const { title, option_a, option_b, option_c, option_d, answer, quiz_id } = req.body;
-        const createdQuestion = await pool.query("insert into question(title, option_a, option_b, option_c, option_d, answer, quiz_id) values ($1, $2, $3, $4, $5, $6, $7) returning *", [title, option_a, option_b, option_c, option_d, answer, quiz_id]);
+        const createdQuestion = await pool.query("insert into question(title, option_a, option_b, option_c, option_d, answer, quiz_id) values ($1, $2, $3, $4, $5, $6, $7)", [title, option_a, option_b, option_c, option_d, answer, quiz_id]);
         res.json(createdQuestion.rows[0]);
     } catch (err) {
         console.log(err.message);
@@ -52,7 +52,7 @@ const deleteQuestion = async (req, res) => {
 
 module.exports = {
     getAllQuestions,
-    getQuestionById,
+    getQuestionByQuizId,
     createQuestion,
     updateQuestion,
     deleteQuestion

@@ -12,37 +12,28 @@ const AddQuestions = () => {
     const [lastName, setLastName] = useState(null);
     const [role, setRole] = useState(null);
 
-    const [quizInfo, setQuizInfo] = useState({
+    const [questionInfo, setQuestionInfo] = useState({
         title: '',
-        description: '',
-        date: '',
-        time: '',
-        duration: '',
-        group_id: ''
+        option_a: '',
+        option_b: '',
+        option_c: '',
+        option_d: '',
+        answer: '',
+        quiz_id: id
+    });
+
+    const [questionCreatedInfo, setQuestionCreatedInfo] = useState({
+        title: '',
+        option_a: '',
+        option_b: '',
+        option_c: '',
+        option_d: '',
+        answer: '',
+        quiz_id: id
     });
 
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
-
-    const getQuizInfoById = () => {
-        if (id == null) {
-            navigate('/quizzes');
-        }
-        axios.get('http://localhost:5000/api/v1/quiz/get-quiz-info/'+id)
-        .then(res => {
-            setQuizInfo({
-                title: res.data.title,
-                description: res.data.description,
-                date: res.data.date,
-                time: res.data.time,
-                duration: minutesToHHMM(res.data.duration),
-                group_id: res.data.group_id
-            })
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    };
 
     const getUserData = () => {
         axios.get('http://localhost:5000/api/v1/users/token')
@@ -60,31 +51,7 @@ const AddQuestions = () => {
         });
     }
 
-    const minutesToHHMM = (minutes) => {
-        var hours = Math.floor(minutes / 60);
-        var remainingMinutes = minutes % 60;
-        var hoursStr = hours < 10 ? '0' + hours : hours.toString();
-        var minutesStr = remainingMinutes < 10 ? '0' + remainingMinutes : remainingMinutes.toString();
-        return hoursStr + ':' + minutesStr;
-    }
-
     const [groups, setGroups] = useState(null);
-
-    const getAllGroups = () => {
-        axios.get('http://localhost:5000/api/v1/groups')
-        .then(res => {
-          setGroups(res.data);
-        })
-        .catch(err => {
-          console.log(err);
-        })
-      }
-    
-    const timeToMinutes = (time) => {
-        const [hours, minutes] = time.split(':').map(Number);
-        const totalMinutes = hours * 60 + minutes;
-        return totalMinutes;
-    } 
 
     const getGroupIdByName = (groupName) => {
         if (groupName == 'All groups') {
@@ -121,9 +88,33 @@ const AddQuestions = () => {
         })
     }
 
+    const [questions, setQuestions] = useState(null);
+
+    const getQuizInfoById = () => {
+        axios.get('http://localhost:5000/api/v1/questions/get-question-by-quiz-id/'+id)
+        .then(res => {
+            setQuestionInfo({
+                title: res.data.title,
+                option_a: res.data.option_a,
+                option_b: res.data.option_b,
+                option_c: res.data.option_c,
+                option_d: res.data.option_d,
+                answer: res.data.answer,
+                quiz_id: res.data.quiz_id
+            });
+            setQuestions(res.data);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+
+    const addNewQuestion = () => {
+        console.log(questionCreatedInfo);
+    }
+
     useEffect(() => {
         getQuizInfoById();
-        getAllGroups();
         getUserData();
     }, []);
 
@@ -151,27 +142,27 @@ const AddQuestions = () => {
                                             <div className='new__quiz__inputs'>
                                                 <div className='new__quiz__input member__info__input'>
                                                     <div>Title:</div>
-                                                    <input type="text" value={quizInfo && quizInfo.title} onChange={e => setQuizInfo({...quizInfo, title: e.target.value})} />
+                                                    <input type="text" onChange={e => setQuestionCreatedInfo({...questionCreatedInfo , title: e.target.value})} />
                                                 </div>
                                                 <div className='new__quiz__input member__info__input'>
                                                     <div>Option 1:</div>
-                                                    <input type="text" value={quizInfo && quizInfo.description} onChange={e => setQuizInfo({...quizInfo, description: e.target.value})} />
+                                                    <input type="text"  onChange={e => setQuestionCreatedInfo({...questionCreatedInfo, option_a: e.target.value})} />
                                                 </div>
                                                 <div className='new__quiz__input member__info__input'>
                                                     <div>Option 2:</div>
-                                                    <input type="text" value={quizInfo && quizInfo.description} onChange={e => setQuizInfo({...quizInfo, description: e.target.value})} />
+                                                    <input type="text" onChange={e => setQuestionCreatedInfo({...questionCreatedInfo, option_b: e.target.value})} />
                                                 </div>
                                                 <div className='new__quiz__input member__info__input'>
                                                     <div>Option 3:</div>
-                                                    <input type="text" value={quizInfo && quizInfo.description} onChange={e => setQuizInfo({...quizInfo, description: e.target.value})} />
+                                                    <input type="text" onChange={e => setQuestionCreatedInfo({...questionCreatedInfo, option_c: e.target.value})} />
                                                 </div>
                                                 <div className='new__quiz__input member__info__input'>
                                                     <div>Option 4:</div>
-                                                    <input type="text" value={quizInfo && quizInfo.description} onChange={e => setQuizInfo({...quizInfo, description: e.target.value})} />
+                                                    <input type="text" onChange={e => setQuestionCreatedInfo({...questionCreatedInfo, option_d: e.target.value})} />
                                                 </div>
                                                 <div className='new__quiz__input member__info__input'>
                                                     <div>Answer:</div>
-                                                    <select onChange={e => setQuizInfo({...quizInfo, group_id: e.target.value})}>
+                                                    <select onChange={e => setQuestionCreatedInfo({...questionCreatedInfo, answer: e.target.value})}>
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
                                                         <option value="3">3</option>
@@ -182,7 +173,7 @@ const AddQuestions = () => {
                                                     <div className="new__quiz__submit member__info__submit">
                                                         <div>
                                                             <i class='bx bxs-edit' ></i>
-                                                            <input type="button" value={"Submit"} onClick={editQuiz}/>
+                                                            <input type="button" value={"Submit"} onClick={addNewQuestion}/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -190,54 +181,60 @@ const AddQuestions = () => {
                                         </form>
                                     </div>
                                     <h2>Quiz questions</h2>
-                                    {/* TODO: quesions here */}
-                                    <div class="quizzes__upcoming__quizzes new__quiz member__info" style={{width: '800px'}}>
-                                        <form>
-                                            <div className='new__quiz__inputs'>
-                                                <div className='new__quiz__input member__info__input'>
-                                                    <div>Title:</div>
-                                                    <input type="text" value={quizInfo && quizInfo.title} onChange={e => setQuizInfo({...quizInfo, title: e.target.value})} />
-                                                </div>
-                                                <div className='new__quiz__input member__info__input'>
-                                                    <div>Option 1:</div>
-                                                    <input type="text" value={quizInfo && quizInfo.description} onChange={e => setQuizInfo({...quizInfo, description: e.target.value})} />
-                                                </div>
-                                                <div className='new__quiz__input member__info__input'>
-                                                    <div>Option 2:</div>
-                                                    <input type="text" value={quizInfo && quizInfo.description} onChange={e => setQuizInfo({...quizInfo, description: e.target.value})} />
-                                                </div>
-                                                <div className='new__quiz__input member__info__input'>
-                                                    <div>Option 3:</div>
-                                                    <input type="text" value={quizInfo && quizInfo.description} onChange={e => setQuizInfo({...quizInfo, description: e.target.value})} />
-                                                </div>
-                                                <div className='new__quiz__input member__info__input'>
-                                                    <div>Option 4:</div>
-                                                    <input type="text" value={quizInfo && quizInfo.description} onChange={e => setQuizInfo({...quizInfo, description: e.target.value})} />
-                                                </div>
-                                                <div className='new__quiz__input member__info__input'>
-                                                    <div>Answer:</div>
-                                                    <select onChange={e => setQuizInfo({...quizInfo, group_id: e.target.value})}>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                    </select>
-                                                </div>
-                                                <div>
-                                                    <div className="new__quiz__submit member__info__submit">
-                                                        <div>
-                                                            <i class='bx bxs-edit' ></i>
-                                                            <input type="button" value={"Edit"} onClick={editQuiz}/>
+                                    {
+                                        (questions && questions.length==0) ?
+                                        <div>No questions</div>
+                                        :
+                                        questions && questions.map(question => (
+                                            <div class="quizzes__upcoming__quizzes new__quiz member__info" style={{width: '800px'}}>
+                                                <form>
+                                                    <div className='new__quiz__inputs'>
+                                                        <div className='new__quiz__input member__info__input'>
+                                                            <div>Title:</div>
+                                                            <input type="text" value={question && question.title} onChange={e => setQuestionInfo({...questionInfo, title: e.target.value})} />
+                                                        </div>
+                                                        <div className='new__quiz__input member__info__input'>
+                                                            <div>Option 1:</div>
+                                                            <input type="text" value={question && question.option_a} onChange={e => setQuestionInfo({...questionInfo, option_a: e.target.value})} />
+                                                        </div>
+                                                        <div className='new__quiz__input member__info__input'>
+                                                            <div>Option 2:</div>
+                                                            <input type="text" value={question && question.option_b} onChange={e => setQuestionInfo({...questionInfo, option_b: e.target.value})} />
+                                                        </div>
+                                                        <div className='new__quiz__input member__info__input'>
+                                                            <div>Option 3:</div>
+                                                            <input type="text" value={question && question.option_c} onChange={e => setQuestionInfo({...questionInfo, option_c: e.target.value})} />
+                                                        </div>
+                                                        <div className='new__quiz__input member__info__input'>
+                                                            <div>Option 4:</div>
+                                                            <input type="text" value={question && question.option_d} onChange={e => setQuestionInfo({...questionInfo, option_d: e.target.value})} />
+                                                        </div>
+                                                        <div className='new__quiz__input member__info__input'>
+                                                            <div>Answer:</div>
+                                                            <select onChange={e => setQuestionInfo({...questionInfo, answer: e.target.value})}>
+                                                                <option selected={question && question.answer == "1"} value="1">1</option>
+                                                                <option  selected={question && question.answer == "2"} value="2">2</option>
+                                                                <option  selected={question && question.answer == "3"} value="3">3</option>
+                                                                <option  selected={question && question.answer == "4"} value="4">4</option>
+                                                            </select>
                                                         </div>
                                                         <div>
-                                                            <i class='bx bxs-trash'></i>
-                                                            <input type="button" value={"Delete"} onClick={deleteQuiz}/>
+                                                            <div className="new__quiz__submit member__info__submit">
+                                                                <div>
+                                                                    <i class='bx bxs-edit' ></i>
+                                                                    <input type="button" value={"Edit"} onClick={editQuiz}/>
+                                                                </div>
+                                                                <div>
+                                                                    <i class='bx bxs-trash'></i>
+                                                                    <input type="button" value={"Delete"} onClick={deleteQuiz}/>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </form>
                                             </div>
-                                        </form>
-                                    </div>
+                                        ))
+                                    }
                                 </div>
                                 </div>
                             </div>

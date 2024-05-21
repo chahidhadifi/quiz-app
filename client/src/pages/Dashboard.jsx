@@ -317,7 +317,8 @@ const Dashboard = () => {
                                                         <h2>No quiz available at this time</h2>
                                                     </div>
                                                     :
-                                                    quizzesForAdmin && quizzesForAdmin(quiz => (
+                                                    quizzesForAdmin && quizzesForAdmin.map(quiz => (
+                                                        (quiz.group_id == userGroupId) ?
                                                         <div className="flex flex-ai-c dashboard__upcoming__quizzes__item" key={quiz.id}>
                                                             <img src={QuizImg} alt=""/>
                                                             <div>
@@ -325,6 +326,8 @@ const Dashboard = () => {
                                                                 <p>{ quiz.date + " - " + quiz.time }</p>
                                                             </div>
                                                         </div>
+                                                        :
+                                                        null
                                                     ))
                                                 }
                                             </div>
