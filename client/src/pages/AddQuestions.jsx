@@ -59,27 +59,12 @@ const AddQuestions = () => {
             return foundGroup ? foundGroup.id : null;
         }
     };
-    
-    const editQuiz = () => {
-        const values = quizInfo;
-        values.duration = timeToMinutes(quizInfo.duration);
-        values.group_id = getGroupIdByName(quizInfo.group_id);
-        axios.put('http://localhost:5000/api/v1/quiz/'+id, values)
-        .then(res => {
-            if (res.statusText === 'OK')
-                navigate('/quizzes');
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    }
 
-    const deleteQuiz = () => {
-        axios.delete('http://localhost:5000/api/v1/quiz/' + id)
+    const deleteQuestion = (event) => {
+        const questionId = event.target.closest('.new__quiz__inputs').querySelector('.id').getAttribute('value');
+        axios.delete('http://localhost:5000/api/v1/questions/delete-question/'+questionId)
         .then(res => {
-            if (res.statusText === 'OK') {
-                navigate('/quizzes');
-            }
+            
         })
         .catch(err => {
             console.log(err);
@@ -89,7 +74,7 @@ const AddQuestions = () => {
     const [questions, setQuestions] = useState(null);
 
     const getQuizInfoById = () => {
-        axios.get('http://localhost:5000/api/v1/questions/get-question-by-quiz-id/'+id)
+        axios.get('http://localhost:5000/api/v1/questions/get-question-by-quiz-id/'+id, questionCreatedInfo)
         .then(res => {
             setQuestionInfo({
                 title: res.data.title,
@@ -204,29 +189,33 @@ const AddQuestions = () => {
                                             <div class="quizzes__upcoming__quizzes new__quiz member__info" style={{width: '800px'}}>
                                                 <form>
                                                     <div className='new__quiz__inputs'>
+                                                        <div className='new__quiz__input member__info__input' style={{display: 'none'}}>
+                                                            <div>Id:</div>
+                                                            <input type="text" readOnly className="id" defaultValue={question && question.id} />
+                                                        </div>
                                                         <div className='new__quiz__input member__info__input'>
                                                             <div>Title:</div>
-                                                            <input type="text" value={question && question.title} onChange={e => setQuestionInfo({...questionInfo, title: e.target.value})} />
+                                                            <input type="text" readOnly defaultValue={question && question.title}  />
                                                         </div>
                                                         <div className='new__quiz__input member__info__input'>
                                                             <div>Option 1:</div>
-                                                            <input type="text" value={question && question.option_a} onChange={e => setQuestionInfo({...questionInfo, option_a: e.target.value})} />
+                                                            <input type="text" readOnly defaultValue={question && question.option_a} />
                                                         </div>
                                                         <div className='new__quiz__input member__info__input'>
                                                             <div>Option 2:</div>
-                                                            <input type="text" value={question && question.option_b} onChange={e => setQuestionInfo({...questionInfo, option_b: e.target.value})} />
+                                                            <input type="text" readOnly defaultValue={question && question.option_b} />
                                                         </div>
                                                         <div className='new__quiz__input member__info__input'>
                                                             <div>Option 3:</div>
-                                                            <input type="text" value={question && question.option_c} onChange={e => setQuestionInfo({...questionInfo, option_c: e.target.value})} />
+                                                            <input type="text" readOnly defaultValue={question && question.option_c} />
                                                         </div>
                                                         <div className='new__quiz__input member__info__input'>
                                                             <div>Option 4:</div>
-                                                            <input type="text" value={question && question.option_d} onChange={e => setQuestionInfo({...questionInfo, option_d: e.target.value})} />
+                                                            <input type="text" readOnly defaultValue={question && question.option_d} />
                                                         </div>
                                                         <div className='new__quiz__input member__info__input'>
                                                             <div>Answer:</div>
-                                                            <select onChange={e => setQuestionInfo({...questionInfo, answer: e.target.value})}>
+                                                            <select disabled >
                                                                 <option selected={question && question.answer == "1"} value="1">1</option>
                                                                 <option  selected={question && question.answer == "2"} value="2">2</option>
                                                                 <option  selected={question && question.answer == "3"} value="3">3</option>
@@ -236,12 +225,8 @@ const AddQuestions = () => {
                                                         <div>
                                                             <div className="new__quiz__submit member__info__submit">
                                                                 <div>
-                                                                    <i class='bx bxs-edit' ></i>
-                                                                    <input type="button" value={"Edit"} onClick={editQuiz}/>
-                                                                </div>
-                                                                <div>
                                                                     <i class='bx bxs-trash'></i>
-                                                                    <input type="button" value={"Delete"} onClick={deleteQuiz}/>
+                                                                    <input type="button" style={{backgroundColor: 'crimson'}} value={"Delete"} onClick={deleteQuestion}/>
                                                                 </div>
                                                             </div>
                                                         </div>
