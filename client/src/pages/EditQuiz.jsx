@@ -134,7 +134,7 @@ const EditQuiz = () => {
                             <div className="dashboard__main">
                                 <SideNavbar role={role}></SideNavbar>
                                 <div className="dashboard__content" style={{display: "flex", flexDirection: "column"}}>
-                                <div>
+                                <div className="btns-quiz">
                                     <Link to='/quizzes' style={{textDecoration: 'none'}}>
                                         <button class="btn new-quiz" style={{width: '100px'}}>
                                             <i class='bx bx-arrow-back'></i>

@@ -341,6 +341,10 @@
             align-items: start;
             margin-right: 100%;
 
+            .btns-quiz {
+                display: flex;
+                align-items: center;
+            }
 
             &__item {
                 width: 630px;

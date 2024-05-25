@@ -611,6 +611,10 @@
     align-items: start;
     margin-right: 100%;
   }
+  .dashboard__content .btns-quiz {
+    display: flex;
+    align-items: center;
+  }
   .dashboard__content__item {
     width: 630px;
   }

@@ -25,16 +25,13 @@ const Dashboard = () => {
     const [roles, setRoles] = useState(['admin', 'member', 'tutor']);
     const [quizzesForAdmin, setQuizzesForAdmin] = useState(null);
     const [usersForAdmin, setUsersForAdmin] = useState(null);
-
     const [quizzesForMember, setQuizzesForMember] = useState(null);
-    const [selectedQuiz, setSelectedQuiz] = useState(null);
     const [currentDateTime, setCurrentDateTime] = useState(null);
     const [completedQuizzes, setCompletedQuizzes] = useState(null);
 
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
 
-    // ! ---------------- Member page ---------------------
     const getUserData = () => {
         axios.get('http://localhost:5000/api/v1/users/token')
         .then(res => {
@@ -54,13 +51,10 @@ const Dashboard = () => {
             console.log(err.message);
         });
     }
-    // ! --------------------------------
 
-    // ! ---------------- Admin page ---------------------
     const getAllQuizzesForAdmin = () => {
         axios.get('http://localhost:5000/api/v1/quiz/')
         .then(res => {
-        //   setQuizzes(res.data);
           setQuizzesForAdmin(res.data);
         })
         .catch(err => {
@@ -90,18 +84,6 @@ const Dashboard = () => {
 
     const changeGroupForAdmin = (event) => {
         const groupName = event.target.innerHTML;
-        // axios.get('http://localhost:5000/api/v1/users/usersbygroup', {
-        //     params: {
-        //       groupName: groupName
-        //     }
-        //   })
-        // .then(res => {
-        //     setUsersForAdmin(res.data);
-        //     console.log(res.data);
-        // })
-        // .catch(err => {
-        //     console.log(err);
-        // })
         if (groupName == 'All') {
             getAllUsers();
         } else {
@@ -119,42 +101,6 @@ const Dashboard = () => {
             })
         }
     }
-    // ! --------------------------------
-
-    // ! ---------------- Globals ---------------------
-    const getCurrentDateTime = async () => {
-        await axios.get('https://script.googleusercontent.com/macros/echo?user_content_key=hp9tRyiF3u0VdLZmUJsj42UPUdVub69fCJyZomvnzFP530-QlxW9QwjAPtF3J3uZ3ZyDelbM8Kj1ME-nqs-jWFGNbccenPQJm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnJ9GRkcRevgjTvo8Dc32iw_BLJPcPfRdVKhJT5HNzQuXEeN3QFwl2n0M6ZmO-h7C6bwVq0tbM60-xIkq8d3Ts1lroRDJVNdycqbkuKKW-JKy&lib=MwxUjRcLr2qLlnVOLh12wSNkqcO1Ikdrk', {withCredentials: false})
-        .then(res => {
-          const { year, month, day, hours, minutes } = res.data;
-          setCurrentDateTime(new Date(year, month-1, day, hours, minutes, 0));
-        })
-        .catch(err => {
-          console.log(err);
-        })
-      }
-    
-      const createDateObjectWithDuration = (dateString, timeString, minutesToAdd) => {
-        const [year, month, day] = dateString.split("-").map(Number);
-        const [hour, minute] = timeString.split(":").map(Number);
-        const dateObject = new Date(year, month - 1, day, hour, minute, 0);
-        dateObject.setMinutes(dateObject.getMinutes() + minutesToAdd);
-        return dateObject;
-      }
-    
-      const createDateObject = (dateString, timeString) => {
-        const [year, month, day] = dateString.split("-").map(Number);
-        const [hour, minute] = timeString.split(":").map(Number);
-        const dateObject = new Date(year, month - 1, day, hour, minute, 0);
-        return dateObject;
-      }
-    
-      const convertMinutesToTime = (minutes) => {
-        const hours = Math.floor(minutes / 60);
-        const remainingMinutes = minutes % 60;
-        const formattedHours = String(hours).padStart(2, '0');
-        const formattedMinutes = String(remainingMinutes).padStart(2, '0');
-        return `${formattedHours}:${formattedMinutes}`;
-      }
     
     const getCompletedQuizzes = () => {
         axios.get('http://localhost:5000/api/v1/quiz/completed-quiz')
@@ -166,25 +112,10 @@ const Dashboard = () => {
         })
     }
 
-    // const handleLogout = () => {
-    //     axios.get('http://localhost:5000/api/v1/users/logout')
-    //     .then(res => {
-    //       location.reload(true);
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     })
-    // }
-    // ! --------------------------------
-
     useEffect(() => {
-        //* globals
         getUserData();
         getAllGroups();
-
-        //* admin
         getAllQuizzesForAdmin();
-        getCurrentDateTime();
         getCompletedQuizzes();
     }, [currentDateTime, userGroupId]);
 
@@ -318,7 +249,7 @@ const Dashboard = () => {
                                                     </div>
                                                     :
                                                     quizzesForAdmin && quizzesForAdmin.map(quiz => (
-                                                        (quiz.group_id == userGroupId) ?
+                                                        (quiz.group_id == userGroupId || quiz.group_id == null) ?
                                                         <div className="flex flex-ai-c dashboard__upcoming__quizzes__item" key={quiz.id}>
                                                             <img src={QuizImg} alt=""/>
                                                             <div>

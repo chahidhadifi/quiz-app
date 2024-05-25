@@ -305,7 +305,7 @@ const Dashboard = () => {
                                                     </div>
                                                     :
                                                     quizzes && quizzes.map(quiz => (
-                                                        (quiz.group_id == userGroupId) ?
+                                                        (quiz.group_id == userGroupId || quiz.group_id == null) ?
                                                             <div class="quizzes__upcoming__quizzes" key={ quiz.id }>
                                                                 <div class="quizzes__upcoming__quizzes__title">
                                                                     <h2>{ quiz.title }</h2>
