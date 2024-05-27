@@ -13,6 +13,7 @@ import CreateGroup from './pages/CreateGroup'
 import ManageGroups from './pages/ManageGroups'
 import EditQuiz from './pages/EditQuiz'
 import AddQuestions from './pages/AddQuestions'
+import OpenQuiz from './pages/OpenQuiz'
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path='/manage-groups' element={<ManageGroups/>}></Route>
         <Route path='/quizzes/edit-quiz/:id' element={<EditQuiz/>}></Route>
         <Route path='/quizzes/add-questions/:id' element={<AddQuestions/>}></Route>
+        <Route path='/quizzes/open-quiz/:id' element={<OpenQuiz/>}></Route>
         <Route path='/*' element={<PageNotFound/>}></Route>
       </Routes>
     </BrowserRouter>

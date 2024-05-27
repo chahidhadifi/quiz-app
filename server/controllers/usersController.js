@@ -102,7 +102,7 @@ const getUniqueUserByToken = async (req, res) => {
         const email = decoded.email;
         const query = await pool.query("select * from users where email=$1", [email]);
         const currentUser = query.rows[0];
-        res.json({status: "Success", email: email, first_name: currentUser.first_name, last_name: currentUser.last_name, role: currentUser.role, group_id: currentUser.group_id});
+        res.json({status: "Success", id: currentUser.id, email: email, first_name: currentUser.first_name, last_name: currentUser.last_name, role: currentUser.role, group_id: currentUser.group_id});
       }
     })
   }

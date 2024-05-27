@@ -43,9 +43,7 @@ create table result (
     id serial primary key,
     member_id int not null,
     quiz_id int not null,
-    score int default 0,
-    foreign key (member_id) references users(id),
-    foreign key (quiz_id) references quiz(id)
+    score decimal(5, 1) default 0
 );
 
 insert into groups (name) values

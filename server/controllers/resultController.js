@@ -1,59 +1,47 @@
 const pool = require("../db");
 
-const getAllResults = async (req, res) => {
-  try {
-    const allResults = await pool.query("select * from result");
-    res.json(allResults.rows);
-  } catch (err) {
-    console.log(err.message);
-  }
-};
-
-const getResultById = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const resultById = await pool.query("select * from result where id=$1", [id]);
-        res.json(resultById.rows[0]);
-    } catch (err) {
-        console.log(err.message);
-    }
-}
-
 const createResult = async (req, res) => {
     try {
         const { member_id, quiz_id, score } = req.body;
-        const createdResult = await pool.query("insert into result(member_id, quiz_id, score) values ($1, $2, $3) returning *", [member_id, quiz_id, score]);
-        res.json(createdResult.rows[0]);
-    } catch (err) {
-        console.log(err.message);
-    }
-}
+        if (member_id == null || quiz_id == null || score == null) {
+            return res.status(400).json({ error: "Missing required fields" });
+        }
 
-const updateResult = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { member_id, quiz_id, score } = req.body;
-        const updatedResult = await pool.query("update result set member_id=$1, quiz_id=$2, score=$3 where id=$4 returning *", [member_id, quiz_id, score, id]);
-        res.json(updatedResult.rows[0]);
-    } catch (err) {
-        console.log(err.message);
-    }
-}
+        const upsertResult = await pool.query(
+            `INSERT INTO result (member_id, quiz_id, score)
+             VALUES ($1, $2, $3)
+             ON CONFLICT (member_id, quiz_id)
+             DO UPDATE SET score = EXCLUDED.score
+             RETURNING *`,
+            [member_id, quiz_id, score]
+        );
 
-const deleteResult = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const deletedResult = await pool.query("delete from result where id=$1 returning *", [id]);
-        res.json({"message": "item deleted successfully"})
+        res.json(upsertResult.rows[0]);
     } catch (err) {
-        console.log(err.message);
+        console.error(err.message);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+const checkResult = async (req, res) => {
+    try {
+        const { member_id, quiz_id } = req.body;
+        const result = await pool.query(
+            `SELECT * FROM result WHERE member_id = $1 AND quiz_id = $2`,
+            [member_id, quiz_id]
+        );
+
+        if (result.rows.length > 0) {
+            res.json({ exists: true });
+        } else {
+            res.json({ exists: false });
+        }
+    } catch (err) {
+        console.error(err.message);
     }
 }
 
 module.exports = {
-    getAllResults,
-    getResultById,
     createResult,
-    updateResult,
-    deleteResult
+    checkResult
 };

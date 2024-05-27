@@ -339,7 +339,7 @@ const Dashboard = () => {
                                                                 <div class="quizzes__upcoming__quizzes__button" style={{marginTop: '15px'}}>
                                                                     <button>
                                                                         <i class='bx bxs-log-in-circle'></i>
-                                                                        <Link style={{color: 'white'}} to={'/quizzes/edit-quiz/'+quizId} className='link' onMouseEnter={getQuizId} onTouchStart={getQuizId}><p>Open</p></Link>
+                                                                        <Link style={{color: 'white'}} to={'/quizzes/open-quiz/'+quizId} className='link' onMouseEnter={getQuizId} onTouchStart={getQuizId}><p>Open</p></Link>
                                                                     </button>
                                                                 </div>
                                                             </div>
