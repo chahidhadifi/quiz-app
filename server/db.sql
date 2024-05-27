@@ -46,6 +46,9 @@ create table result (
     score decimal(5, 1) default 0
 );
 
+alter table result
+add constraint unique_member_quiz unique (member_id, quiz_id);
+
 insert into groups (name) values
 ('group1'), ('group2'), ('group3');
 

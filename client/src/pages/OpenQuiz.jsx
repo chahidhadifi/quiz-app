@@ -175,29 +175,55 @@ const OpenQuizOld = () => {
                         <div className="quizzes__upcoming__quizzes new__quiz member__info" style={{ width: '800px' }}>
                             <div>
                                 <h3>Quiz informations</h3>
-                                <p>Title: {quizInfo.title}</p>
-                                <p>Description: {quizInfo.description}</p>
-                                <p>Date: {quizInfo.date}</p>
-                                <p>Time: {quizInfo.time}</p>
-                                <p>Duration (HH:MM): {quizInfo.duration}</p>
-                                <p>Group: {quizInfo.group_id}</p>
+                                <div className='new__quiz__input member__info__input'>
+                                    <div>Title:</div>
+                                    <input type="text" readOnly value={quizInfo && quizInfo.title} />
+                                </div>
+                                <div className='new__quiz__input member__info__input'>
+                                    <div>Date:</div>
+                                    <input type="text" readOnly value={quizInfo && quizInfo.date} />
+                                </div>
+                                <div className='new__quiz__input member__info__input'>
+                                    <div>Time:</div>
+                                    <input type="text" readOnly value={quizInfo && quizInfo.time} />
+                                </div>
+                                <div className='new__quiz__input member__info__input'>
+                                    <div style={{width: '250px'}}>Duration (HH:MM):</div>
+                                    <input type="text" readOnly value={quizInfo && quizInfo.duration} />
+                                </div>
                             </div>
+                        </div>
+                        <div className="quizzes__upcoming__quizzes new__quiz member__info" style={{ width: '800px', textTransform: 'capitalize' }}>
                             <div>
-                                <h3>Time Remaining: {timeLeft}</h3>
+                                <h3 style={{float: 'right', marginRight: '10px', color: '#0D1321'}} className="flex flex-fd-r flex-ai-c">
+                                    <i class='bx bxs-time' style={{marginRight: '5px'}}></i>
+                                    Time Remaining: {timeLeft}
+                                </h3>
                                 <h3>Questions</h3>
                                 {questions.map((question, index) => (
-                                    <div key={question.id}>
-                                        <p>Question {index + 1}: {question.title}</p>
-                                        <select value={selectedOptions[question.id]} onChange={(e) => handleAnswer(question.id, e.target.value)}>
-                                            <option value="">Choose an option</option>
-                                            <option value={question.option_a}>{question.option_a}</option>
-                                            <option value={question.option_b}>{question.option_b}</option>
-                                            <option value={question.option_c}>{question.option_c}</option>
-                                            <option value={question.option_d}>{question.option_d}</option>
-                                        </select>
+                                    <div key={question.id} style={{marginBottom: '20px'}}>
+                                        <div className='new__quiz__input member__info__input'>
+                                            <div style={{width: '213px'}}>Question {index + 1}:</div>
+                                            <input type="text" readOnly value={question.title} />
+                                        </div>
+                                        <div className='new__quiz__input member__info__input'>
+                                            <div>Answer:</div>
+                                            <select style={{fontWeight: '500'}} value={selectedOptions[question.id]} onChange={(e) => handleAnswer(question.id, e.target.value)}>
+                                                    <option value="">Choose an option</option>
+                                                    <option value={question.option_a}>{question.option_a}</option>
+                                                    <option value={question.option_b}>{question.option_b}</option>
+                                                    <option value={question.option_c}>{question.option_c}</option>
+                                                    <option value={question.option_d}>{question.option_d}</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 ))}
-                                <button onClick={calculateScore} className="btn submit-btn">Submit</button>
+                                <div className="new__quiz__submit member__info__submit">
+                                    <div onClick={calculateScore}>
+                                        <i class='bx bxs-edit' ></i>
+                                        <input type="button" value={"Submit"}/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
