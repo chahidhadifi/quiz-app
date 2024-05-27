@@ -92,7 +92,17 @@ const AddQuestions = () => {
         })
     }
 
-    const addNewQuestion = () => {
+    const addNewQuestion = (event) => {
+        let answerValue = event.target.closest(".new__quiz__inputs").querySelector('select').value;
+        if (answerValue == 1) {
+            questionCreatedInfo.answer = questionCreatedInfo.option_a;
+        } else if (answerValue == 2) {
+            questionCreatedInfo.answer = questionCreatedInfo.option_b;
+        } else if (answerValue == 3) {
+            questionCreatedInfo.answer = questionCreatedInfo.option_c;
+        } else {
+            questionCreatedInfo.answer = questionCreatedInfo.option_d;
+        }
         axios.post('http://localhost:5000/api/v1/questions/add-new-question/'+id , questionCreatedInfo)
         .then(res => {
             if (res.statusText == "OK") {
