@@ -83,6 +83,7 @@ const OpenQuizOld = () => {
             setLastName(res.data.last_name);
             setRole(res.data.role);
             setUserId(res.data.id);
+            setEmail(res.data.email);
           }
         })
         .catch(err => {
