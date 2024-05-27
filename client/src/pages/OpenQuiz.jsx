@@ -12,6 +12,7 @@ const OpenQuizOld = () => {
     const [firstName, setFirstName] = useState(null);
     const [lastName, setLastName] = useState(null);
     const [role, setRole] = useState(null);
+    const [email, setEmail] = useState(null);
 
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
@@ -121,28 +122,40 @@ const OpenQuizOld = () => {
         
         axios.post('http://localhost:5000/api/v1/results/', updatedScoreTemp)
             .then(res => {
-                console.log(res);
             })
             .catch(err => {
                 console.log(err);
             });
-    
-        console.log(updatedScoreTemp);
+
+        axios.post('http://localhost:5000/api/v1/mail/',
+            {
+                receiver_mail: email,
+                receiver_name: firstName+' '+lastName,
+                qcm: quizInfo.title,
+                score: score
+            })
+        .then(res => {
+        })
+        .catch(err => {
+            console.log(err);
+        })
     };
     
 
-    const checkResultAndRedirect = async () => {
+    const checkResultAndRedirect = () => {
         try {
-            const response = await axios.post('http://localhost:5000/api/v1/results/check-result', {
+            axios.post('http://localhost:5000/api/v1/results/check-result', {
                 member_id: userId,
                 quiz_id: id
-            });
-
-            if (response.data.exists) {
-                navigate('/quizzes');
-            } else {
-                console.log('Result does not exist');
-            }
+            })
+            .then(response => {
+                if (response.data.exists) {
+                    navigate('/quizzes');
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
         } catch (err) {
             console.error('Error checking result:', err);
         }
@@ -227,11 +240,11 @@ const OpenQuizOld = () => {
                             </div>
                         </div>
                     </div>
-                    {score !== null && (
+                    {/* {score !== null && (
                         <div className="score-container">
                             <h3>Your Score: {score}%</h3>
                         </div>
-                    )}
+                    )} */}
                 </div>
             </div>
         </div>
