@@ -32,7 +32,7 @@ const MailSender=(receiver_email,receiver_name,qcm,score)=>{
         Votre score dans le qcm ${qcm} est ${score}.`,
     html:`<h2>Bonjour ${receiver_name},</h2>
     
-    <p style='text-indent: 30px;'>Votre Score dans le qcm <strong>${qcm}</strong> est <strong>${score}</strong>.`
+    <p style='text-indent: 30px;'>Votre Score dans le qcm <strong>${qcm}</strong> est <strong>${score+'%'}</strong>.`
   };
   sendMail(transporter,mailOptions);
 }

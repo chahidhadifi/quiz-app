@@ -150,6 +150,16 @@ const Dashboard = () => {
         setQuizId(id);
     }
 
+    const isQuizTime = (quizDate, quizTime) => {
+        const [quizYear, quizMonth, quizDay] = quizDate.split('-').map(Number);
+        const [quizHour, quizMinute] = quizTime.split(':').map(Number);
+      
+        const quizDateTime = new Date(quizYear, quizMonth - 1, quizDay, quizHour, quizMinute);
+        const currentDateTime = new Date();
+      
+        return quizDateTime.getTime() <= currentDateTime.getTime();
+    };
+
     useEffect(() => {
         getUserData();
         getAllGroups();
@@ -252,52 +262,6 @@ const Dashboard = () => {
                                     <div className="dashboard__content" style={{display: "flex", flexDirection: "column"}}>
                                         <div class="quizzes__content__item">
                                             {
-                                                // quizzes && quizzes.map(quiz => (
-                                                //     (quiz.group_id == userGroupId) ?
-                                                //     <div class="quizzes__upcoming__quizzes" key={ quiz.id }>
-                                                //         <div class="quizzes__upcoming__quizzes__title">
-                                                //             <h2>{ quiz.title }</h2>
-                                                //         </div>
-                                                //         <div class="quizzes__upcoming__quizzes__datetime" style={{marginBottom: '2px', display: 'none'}}>
-                                                //             <div>
-                                                //                 <i class='bx bxs-key'></i>
-                                                //                 <p className='key'>{ quiz.id }</p>
-                                                //             </div>
-                                                //         </div>
-                                                //         <div class="quizzes__upcoming__quizzes__datetime">
-                                                //             <div>
-                                                //                 <i class='bx bxs-calendar' ></i>
-                                                //                 <p>{ quiz.date }</p>
-                                                //             </div>
-                                                //             <div>
-                                                //                 <i class='bx bxs-time-five' ></i>
-                                                //                 <p>{ quiz.time }</p>
-                                                //             </div>
-                                                //         </div>
-                                                //         <div class="quizzes__upcoming__quizzes__option__v1">
-                                                //             <p>Duration</p>
-                                                //             <p>{ quiz.duration } minutes</p>
-                                                //         </div>
-                                                //         <div class="quizzes__upcoming__quizzes__option__v2">
-                                                //             <p>Description</p>
-                                                //             <p>
-                                                //                 { quiz.description }
-                                                //             </p>
-                                                //         </div>
-                                                //         <div class="quizzes__upcoming__quizzes__button" style={{marginTop: '15px'}}>
-                                                //             <button>
-                                                //                 <i class='bx bxs-log-in-circle'></i>
-                                                //                 <Link style={{color: 'white'}} to={'/quizzes/edit-quiz/'+quizId} className='link' onMouseEnter={getQuizId} onTouchStart={getQuizId}><p>Open</p></Link>
-                                                //             </button>
-                                                //         </div>
-                                                //     </div>
-                                                //     :
-                                                    // <div className='flex flex-fd-r flex-ai-c'>
-                                                    //     <i class='bx bxs-error-circle' style={{color: '#ECA8A8', marginRight: '10px'}}></i>
-                                                    //     <h2>No quiz available at this time</h2>
-                                                    // </div>
-                                                    
-                                                // ))
                                                 (quizzes && quizzes.length==0) ?
                                                     <div className='flex flex-fd-r flex-ai-c'>
                                                         <i class='bx bxs-error-circle' style={{color: '#ECA8A8', marginRight: '10px'}}></i>
@@ -337,10 +301,15 @@ const Dashboard = () => {
                                                                     </p>
                                                                 </div>
                                                                 <div class="quizzes__upcoming__quizzes__button" style={{marginTop: '15px'}}>
-                                                                    <button>
-                                                                        <i class='bx bxs-log-in-circle'></i>
-                                                                        <Link style={{color: 'white'}} to={'/quizzes/open-quiz/'+quizId} className='link' onMouseEnter={getQuizId} onTouchStart={getQuizId}><p>Open</p></Link>
-                                                                    </button>
+                                                                {
+                                                                    isQuizTime(quiz.date, quiz.time) ?
+                                                                        <button>
+                                                                            <i class='bx bxs-log-in-circle'></i>
+                                                                            <Link style={{color: 'white'}} to={'/quizzes/open-quiz/'+quizId} className='link' onMouseEnter={getQuizId} onTouchStart={getQuizId}><p>Open</p></Link>
+                                                                        </button>
+                                                                    :
+                                                                    null
+                                                                }
                                                                 </div>
                                                             </div>
                                                         :
